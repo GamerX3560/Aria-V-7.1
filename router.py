@@ -47,6 +47,8 @@ from core.vision_engine import VisionEngine
 from core.device_mesh import DeviceMesh
 from core.skill_evolver import SkillEvolver
 from core.encrypted_storage import EncryptedStorage
+from core.browser_agent import BrowserAgent
+from core.aria_mesh import ARIAMesh
 
 # ─── Logging ──────────────────────────────────────────────
 logging.basicConfig(
@@ -79,6 +81,8 @@ vision_engine = VisionEngine()
 device_mesh = DeviceMesh()
 skill_evolver = SkillEvolver()
 encrypted_store = EncryptedStorage()
+browser_agent = BrowserAgent(llm_api_key=NVIDIA_API_KEY, llm_base_url=BASE_URL, llm_model=MODEL_NAME)
+aria_mesh = ARIAMesh()
 proactive_monitor = ProactiveMonitor()
 
 def load_identity_raw() -> str:
@@ -147,6 +151,7 @@ DEVICE MESH:
 - Remote: SSH to other ARIA instances
 
 RULES FOR ACTIONS:
+- APP LAUNCHING: To open/launch applications (like 'antigravity', 'firefox'), ALWAYS use a bash block with `nohup <app_name> &> /dev/null &`. Do NOT use Python's `import` statement for opening apps.
 - GUI apps must use & (e.g. firefox &). Blocking commands should NOT.
 - After opening an app, verify with `pgrep -il <name>`.
 - PACKAGE MANAGER: Always use `--noconfirm` with yay or pacman.
@@ -249,8 +254,7 @@ async def handle_message(update: Update, context):
     rag_memory.store_conversation("user", text)
 
     # ─── Status message ────────────────────────────────
-    greeting = personality_engine.get_greeting()
-    status_msg = await update.message.reply_text(f"🧠 {greeting} Processing...")
+    status_msg = await update.message.reply_text(f"🧠 Processing...")
     last_status_text = ""
 
     async def status_callback(msg):
@@ -449,6 +453,13 @@ def main():
             # Start monitoring as background task
             asyncio.create_task(proactive_monitor.start())
             log.info("Proactive Monitor started as background task")
+        
+        # Start mesh API server for multi-ARIA communication
+        try:
+            asyncio.create_task(aria_mesh.start_server())
+            log.info("ARIA Mesh server started as background task")
+        except Exception as e:
+            log.warning(f"Mesh server failed to start: {e}")
     
     app = ApplicationBuilder().token(TELEGRAM_TOKEN).post_init(post_init).build()
     
