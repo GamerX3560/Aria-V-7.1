@@ -25,30 +25,30 @@ MODELS = {
         "name": "qwen/qwen2.5-coder-32b-instruct",
         "description": "General purpose + code — best all-rounder",
         "temperature": 0.4,
-        "max_tokens": 4096,
+        "max_tokens": 2048,
     },
     "fast": {
-        "name": "qwen/qwen2.5-coder-32b-instruct",
-        "description": "Fast responses for simple tasks",
-        "temperature": 0.6,
-        "max_tokens": 1024,  # shorter for speed
+        "name": "meta/llama-3.1-8b-instruct",   # ← 8B model: 5-10x faster than 32B
+        "description": "Fast responses for chat, math, quick answers",
+        "temperature": 0.5,
+        "max_tokens": 512,   # Short answers for speed
     },
     "code": {
         "name": "qwen/qwen2.5-coder-32b-instruct",
         "description": "Specialized code generation",
-        "temperature": 0.2,  # more deterministic for code
+        "temperature": 0.2,
         "max_tokens": 4096,
     },
     "reasoning": {
         "name": "qwen/qwen2.5-coder-32b-instruct",
         "description": "Deep analysis and reasoning",
         "temperature": 0.3,
-        "max_tokens": 4096,
+        "max_tokens": 2048,
     },
     "creative": {
         "name": "qwen/qwen2.5-coder-32b-instruct",
         "description": "Creative writing, stories, jokes",
-        "temperature": 0.8,  # higher creativity
+        "temperature": 0.8,
         "max_tokens": 2048,
     },
 }
@@ -81,9 +81,12 @@ TASK_PATTERNS = {
         r"\b(funny|humor|entertaining|fiction)\b",
     ],
     "fast": [
-        r"^(hi|hello|hey|yo|sup|thanks|thank you|ok|okay|bye|good|great|nice|cool)[\s!?.]*$",
-        r"^.{1,20}$",  # Very short messages
-        r"\b(what time|date today|how are you|who are you)\b",
+        r"^(hi|hello|hey|yo|sup|thanks|thank you|ok|okay|bye|good|great|nice|cool|yes|no|sure)[\s!?.]*$",
+        r"^.{1,20}$",          # Very short messages
+        r"\b(what time|date today|how are you|who are you|what is your name)\b",
+        r"^\s*[\d\s\+\-\*\/\(\)\^\.]+\s*[=?]?\s*$",  # Pure math: 23*34, (5+3)*2
+        r"\bwhat is\s+[\d\s\+\-\*\/\(\)]+\s*\??$",   # "what is 23*34?"
+        r"\b(convert|calculate|how many|how much).{1,40}$",  # simple calculations
     ],
 }
 

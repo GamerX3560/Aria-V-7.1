@@ -92,25 +92,36 @@ def load_identity_raw() -> str:
         return ""
 
 
+# ─── Vision context cache (avoid subprocess spam on every message) ─────────
+_vision_cache: str = ""
+_vision_cache_ts: float = 0.0
+_VISION_TTL: float = 30.0  # refresh at most every 30s
+
+def _get_cached_vision() -> str:
+    """Get vision context, cached for 30s to avoid subprocess per-message."""
+    global _vision_cache, _vision_cache_ts
+    import time
+    now = time.time()
+    if now - _vision_cache_ts > _VISION_TTL:
+        _vision_cache = vision_engine.get_screen_text_context()
+        _vision_cache_ts = now
+    return _vision_cache
+
 # ─── System Prompt ────────────────────────────────────────
-def build_system_prompt(user_message: str = "") -> str:
-    """Build the complete system prompt with ALL modules contributing."""
+_BASE_PROMPT: str = ""          # cached static portion
+_BASE_PROMPT_SKILLS_COUNT: int = 0
+
+def _get_base_prompt() -> str:
+    """Cache the static (never-changing) part of the system prompt."""
+    global _BASE_PROMPT, _BASE_PROMPT_SKILLS_COUNT
+    current_count = len(skill_loader.list_skills())
+    if _BASE_PROMPT and _BASE_PROMPT_SKILLS_COUNT == current_count:
+        return _BASE_PROMPT
     identity = load_identity_raw()
     skills = skill_loader.get_skills_for_prompt()
     planner_instructions = TaskPlanner.get_planner_prompt()
-    context = context_engine.get_full_context()
-    
-    # Personality mood detection
-    mood = personality_engine.detect_mood(user_message) if user_message else "neutral"
-    personality_section = personality_engine.get_style_prompt(mood)
-    
-    # RAG recall for relevant past memories
-    rag_context = rag_memory.get_relevant_context(user_message) if user_message else ""
-    
-    # Vision — current screen state (text-based, efficient)
-    screen_context = vision_engine.get_screen_text_context()
-
-    return f"""You are ARIA v7, a hyper-intelligent autonomous AI Agent running on Arch Linux with Hyprland.
+    _BASE_PROMPT_SKILLS_COUNT = current_count
+    _BASE_PROMPT = f"""You are ARIA v7, a hyper-intelligent autonomous AI Agent running on Arch Linux with Hyprland.
 You are the most advanced personal AI assistant — smarter than Jarvis, with unlimited execution and multi-sensory awareness.
 
 YOUR ARCHITECTURE:
@@ -119,19 +130,11 @@ When you output a bash block, the system automatically executes it and feeds the
 You can run as many commands as needed — there is NO iteration limit.
 When finished, speak normally WITHOUT a bash block.
 
-MULTI-MODEL BRAIN:
-You automatically get the optimal model config for each task type:
-- Simple chat → fast (lower tokens)
-- Code → deterministic (low temperature)
-- Creative → high creativity (high temperature)
-- Reasoning → thorough (medium temperature)
-
 AGENT CAPABILITIES:
 - Execute code in any language (Python, Bash, Go, JS, C, etc.)
 - Browse the web stealthily (Scrapling anti-bot bypass)
 - Search, read, and manipulate any file
 - Install packages, configure services, manage the OS
-- Decompose complex tasks into sub-agent plans
 - See the screen (text-based vision + OCR on demand)
 - Speak responses aloud (with male/female voice switching)
 - Recall ANY past conversation via semantic memory search
@@ -140,18 +143,14 @@ AGENT CAPABILITIES:
 - Auto-discover and install new skills autonomously
 - Monitor system health and send proactive alerts
 
-VOICE COMMANDS:
-- To speak aloud: respond normally, the voice engine handles TTS
-- User can switch voice: "switch to male voice", "switch to female voice"
-- To read screen: "what's on my screen?" triggers OCR
+VOICE: User can say "switch to male/female/aria voice" to change TTS voice.
 
 DEVICE MESH:
 - Local PC: direct execution
 - Android: `adb shell su -c "command"` (rooted devices)
-- Remote: SSH to other ARIA instances
 
 RULES FOR ACTIONS:
-- APP LAUNCHING: To open/launch applications (like 'antigravity', 'firefox'), ALWAYS use a bash block with `nohup <app_name> &> /dev/null &`. Do NOT use Python's `import` statement for opening apps.
+- APP LAUNCHING: Always use `nohup <app_name> &> /dev/null &` in a bash block. NEVER use Python `import` to open apps.
 - GUI apps must use & (e.g. firefox &). Blocking commands should NOT.
 - After opening an app, verify with `pgrep -il <name>`.
 - PACKAGE MANAGER: Always use `--noconfirm` with yay or pacman.
@@ -161,14 +160,6 @@ RULES FOR ACTIONS:
 - COMPLETION: Respond conversationally WITHOUT ```bash blocks when done.
 
 {planner_instructions}
-
-{context}
-
-{personality_section}
-
-{rag_context}
-
-{screen_context}
 
 SYSTEM: Ryzen 5 3400G | RX 6600 8GB | 16GB RAM | Arch Linux + Hyprland
 
@@ -181,6 +172,37 @@ SYSTEM: Ryzen 5 3400G | RX 6600 8GB | 16GB RAM | Arch Linux + Hyprland
 — Evolved skills: {len(skill_evolver.list_evolved_skills())} auto-generated tools in ~/aria/skills/evolved/
 — Device Mesh: {len(device_mesh._devices)} connected devices
 --------------------------------
+"""
+    return _BASE_PROMPT
+
+def build_system_prompt(user_message: str = "", task_type: str = "default") -> str:
+    """
+    Build the system prompt. Fast-path for simple queries skips expensive
+    RAG search and vision subprocess calls (saves up to 12s per message).
+    """
+    base = _get_base_prompt()
+
+    # ── FAST PATH: simple chat, greetings, quick math ───────────────────────
+    # Skip RAG (ChromaDB embedding, ~1-3s) and vision (3 subprocesses, ~9s)
+    if task_type == "fast":
+        personality_section = personality_engine.get_style_prompt("neutral")
+        return base + f"\n{personality_section}\n"
+
+    # ── FULL PATH: code, reasoning, file tasks, etc. ─────────────────────────
+    context = context_engine.get_full_context()
+    mood = personality_engine.detect_mood(user_message) if user_message else "neutral"
+    personality_section = personality_engine.get_style_prompt(mood)
+    rag_context = rag_memory.get_relevant_context(user_message) if user_message else ""
+    screen_context = _get_cached_vision()  # cached, max 1 subprocess call per 30s
+
+    return base + f"""
+{context}
+
+{personality_section}
+
+{rag_context}
+
+{screen_context}
 """
 
 
@@ -240,22 +262,27 @@ async def handle_message(update: Update, context):
 
     log.info(f'[MSG] "{text[:80]}"')
 
-    # ─── Route to optimal model ────────────────────────
+    # ─── Classify task once, reuse for model routing + prompt ──
+    task_type = classify_task(text)
     model_name, temperature, max_tokens = route_model(text)
+
+    # ─── Build system prompt (fast-path skips RAG+vision) ─────
+    system_prompt = build_system_prompt(text, task_type=task_type)
 
     # ─── Get agent loop ────────────────────────────────
     agent = get_agent_loop(user_id, text)
-    
-    # Update system prompt with live context + personality
-    agent.memory.update_system_prompt(build_system_prompt(text))
+    agent.memory.update_system_prompt(system_prompt)
     agent.memory.push("user", text)
 
-    # Store in RAG memory (never forget)
-    rag_memory.store_conversation("user", text)
-
-    # ─── Status message ────────────────────────────────
+    # ─── Status message (send BEFORE slow RAG store) ─────────
     status_msg = await update.message.reply_text(f"🧠 Processing...")
     last_status_text = ""
+
+    # Store in RAG memory (non-blocking, best-effort)
+    try:
+        rag_memory.store_conversation("user", text)
+    except Exception:
+        pass
 
     async def status_callback(msg):
         nonlocal last_status_text
