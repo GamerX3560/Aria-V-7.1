@@ -1,0 +1,49 @@
+# ARIA — Ignore Patterns
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+*.egg
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Secrets (NEVER commit)
+vault.json
+*.key
+*.pem
+.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+*.bak
+
+# Reference repos (development only, not shipped)
+reference_repos/
+
+# Temporary
+/tmp/
+*.tmp
+*.log
+
+# Memory/conversations (user-specific data)
+memory/conversations/
+
+# Tools (compiled, heavy)
+tools/llama.cpp/
+
+# Playwright browsers
+.playwright/
