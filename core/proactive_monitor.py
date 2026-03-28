@@ -204,14 +204,16 @@ class ProactiveMonitor:
         except Exception:
             pass  # Desktop PC, no battery
 
-    async def run_checks(self):
-        """Run all health checks once."""
+    async def run_checks(self) -> dict:
+        """Run all health checks once. Returns summary of current metrics."""
+        stats = self.get_system_stats()
         await self.check_disk()
         await self.check_ram()
         await self.check_cpu()
         await self.check_gpu_temp()
         await self.check_network()
         await self.check_battery()
+        return stats
 
     async def start(self):
         """Start the monitoring loop."""
@@ -231,16 +233,60 @@ class ProactiveMonitor:
         self._running = False
         log.info("Proactive Monitor stopped")
 
-    def get_status(self) -> str:
-        """Get a formatted status summary."""
+    def get_system_stats(self) -> dict:
+        """Get current system metrics as a dict (for on-demand queries)."""
         try:
             cpu = psutil.cpu_percent(interval=0.1)
             ram = psutil.virtual_memory()
             disk = psutil.disk_usage('/')
+            
+            stats = {
+                "cpu_percent": cpu,
+                "ram_percent": ram.percent,
+                "ram_used_gb": round(ram.used / (1024**3), 1),
+                "ram_total_gb": round(ram.total / (1024**3), 1),
+                "disk_percent": disk.percent,
+                "disk_free_gb": round(disk.free / (1024**3), 1),
+                "disk_total_gb": round(disk.total / (1024**3), 1),
+            }
+            
+            # GPU temp (AMD)
+            for path in [
+                "/sys/class/drm/card1/device/hwmon/hwmon1/temp1_input",
+                "/sys/class/drm/card0/device/hwmon/hwmon0/temp1_input",
+            ]:
+                if os.path.exists(path):
+                    try:
+                        with open(path) as f:
+                            stats["gpu_temp_c"] = round(int(f.read().strip()) / 1000, 1)
+                    except Exception:
+                        pass
+                    break
+            
+            # Battery
+            battery = psutil.sensors_battery()
+            if battery:
+                stats["battery_percent"] = battery.percent
+                stats["battery_plugged"] = battery.power_plugged
+            
+            return stats
+        except Exception as e:
+            log.error(f"get_system_stats error: {e}")
+            return {}
+
+    def get_status(self) -> str:
+        """Get a formatted status summary string."""
+        try:
+            stats = self.get_system_stats()
+            gpu_info = f" | GPU: {stats.get('gpu_temp_c', '?')}°C" if 'gpu_temp_c' in stats else ""
             return (
                 f"Monitor: {'🟢 Active' if self._running else '⚪ Stopped'}\n"
-                f"CPU: {cpu}% | RAM: {ram.percent}% | Disk: {disk.percent}%\n"
+                f"CPU: {stats.get('cpu_percent','?')}% | "
+                f"RAM: {stats.get('ram_percent','?')}% ({stats.get('ram_used_gb','?')}/{stats.get('ram_total_gb','?')}GB) | "
+                f"Disk: {stats.get('disk_percent','?')}% ({stats.get('disk_free_gb','?')}GB free)"
+                f"{gpu_info}\n"
                 f"Alerts sent: {len(self._alert_history.get('last_alerts', {}))}"
             )
         except Exception:
             return "Monitor: Error reading status"
+
