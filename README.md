@@ -1,159 +1,197 @@
 <div align="center">
   <img src="aria-enterprise/src-tauri/icons/128x128.png" alt="ARIA Logo" width="128" height="128" />
-  <h1>ARIA v8.0<br/>Enterprise Context Engine</h1>
-  <p><strong>The Ultimate Distributed Autonomous Intelligence Desktop Environment</strong></p>
+  <h1>ARIA v8.0<br/>Enterprise Context Engine & OS Intelligence</h1>
+  <p><strong>The Ultimate Distributed, Privacy-First Autonomous AI Operating Environment</strong></p>
   
   [![Version](https://img.shields.io/badge/version-8.0.0-blue.svg?style=for-the-badge)](https://github.com/GamerX3560/Aria-V-7.1)
   [![Rust Bridge](https://img.shields.io/badge/Tauri_IPC-Rust-CE412B.svg?style=for-the-badge&logo=rust)](https://tauri.app)
   [![React UI](https://img.shields.io/badge/GUI-React_19-61DAFB.svg?style=for-the-badge&logo=react)](https://reactjs.org)
-  [![Backend](https://img.shields.io/badge/Engine-Python_3.12-3776AB.svg?style=for-the-badge&logo=python)](https://python.org)
-  [![Platform](https://img.shields.io/badge/OS-Arch_Linux-1793D1.svg?style=for-the-badge&logo=arch-linux)](https://archlinux.org/)
+  [![Backend](https://img.shields.io/badge/AI_Engine-Python_3.12-3776AB.svg?style=for-the-badge&logo=python)](https://python.org)
+  [![Platform](https://img.shields.io/badge/Target_OS-Arch_Linux_Wayland-1793D1.svg?style=for-the-badge&logo=arch-linux)](https://archlinux.org/)
+  [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 </div>
 
 <br/>
 
-> **ARIA (Antigravity Research Intelligence Assistant)** has evolved from a simple Python CLI tool into a fully distributed, multi-agent AI operating environment. Version 8.0 introduces the **Enterprise Desktop Manager**, a Google Cloud-grade Tauri/React frontend providing unparalleled control over 18 autonomous subsystems, real-time memory contexts, and the dynamic skill matrix.
+> **ARIA (Antigravity Research Intelligence Assistant)** is far more than a simple chatbot or script. It is a completely autonomous, multi-agent operating environment designed to deeply integrate with your physical OS (Arch Linux/Wayland), hardware architectures (AMD ROCm), and personal data structure. Version 8.0 couples a highly advanced autonomous execution ring with a Google Cloud-grade Tauri/React frontend dashboard. 
 
 ---
 
-## ⚡ Executive Summary & Innovations
+## ⚡ 1. The ARIA Vision & Core Tenets
 
-ARIA v8.0 is a complete rewrite of the intelligence backend coupled with a massive GUI front-end overhaul. It is designed to run entirely locally, maximizing privacy and leveraging local hardware (e.g., AMD ROCm architecture, Wayland/Hyprland ecosystems). 
+ARIA is built with extreme paranoia and uncompromised local-first methodology. 
 
-### Major Features
-1. **Enterprise Desktop Manager (GUI):** Built on Tauri 2.0 and React 19, featuring sub-millisecond Rust IPC bridges, glassmorphic UI, and 14 independent control panels spanning telemetry to active agent orchestration.
-2. **Infinite Execution Loop:** `agent_loop.py` features a highly advanced, self-healing execution engine. It tracks its own consecutive failures, avoids duplicate error traps, and utilizes a "stuck detection" guard that breaks infinite loops intelligently.
-3. **Multi-Modal Deep Research (v4):** The `deep_research_v4.py` agent acts as a crawler with 6 sequential deep-dive stages: GitHub API search, Awesome Lists integration, DuckDuckGo multi-page crawls, Reddit/Hackernews scrapes, Arch Wiki extraction, and triple-pass LLM distillation.
-4. **Context Injection Engine:** ARIA intercepts local user data (`~/.personal_data/`, OCR'd screenshots, PDFs) and merges them seamlessly with active RAG DB (ChromaDB) retrievals to assemble perfectly contextual prompts prior to inference.
-5. **Zero-Shot System Integration:** Full manipulation of Arch Linux environments (via Wayland, PipeWire, `systemd`, `ydotool`) without human supervision. 
+1. **Hardware Native (No NVIDIA Required):** ARIA explicitly avoids CUDA lock-in, optimizing AI workloads across AMD GPUs via ROCm and PyTorch OpenCL integrations. 
+2. **Infinite Execution Stability:** AI models hallucinate. Rather than crashing, ARIA expects failure. The `agent_loop.py` incorporates stuck-detection, auto-correction algorithms, and duplicate-command evasion to keep ARIA working over hundreds of consecutive sub-tasks.
+3. **Data Paranoia Vault:** No secrets exist in code. All GitHub keys, LLM tokens, and API webhooks are injected via the Git-ignored `vault/` directory with explicit memory scrubbing rules.
+4. **Wayland & PipeWire Native:** Full integration with Hyprland screen captures, `ydotool` emulated keypresses, `wl-clipboard` interceptors, and Piper offline text-to-speech routing.
 
 ---
 
-## 🏗️ Advanced Architecture
+## 🧠 2. The Intelligence Core (Backend Python Architecture)
 
-ARIA is partitioned into four distinct operational layers connected via IPC commands and UNIX sockets.
+ARIA's brain consists of 18 meticulously separated Python modules operating inside `core/`. These form the "Exoskeleton" of the reasoning agent:
 
-```mermaid
-graph TD
-    A[React 19 / Zustand Frontend] -->|Tauri IPC Call| B(Rust Tauri Bridge)
-    B -->|UNIX Socket/System Monitor| C{Native System}
-    B -->|File I/O Watcher| D[Python Engine]
-    D --> E[Model Router]
-    E --> F[Qwen 2.5 Coder]
-    D --> G[Deep Research Agents]
-    D --> H[Browser Automator]
-    H --> I[Playwright CDP]
-```
+### Reasoning & Memory
+*   **`core.context_engine`**: The exact context injector. It splices system configurations, API schemas, user preferences, and the exact directory contents before calling the LLM—guaranteeing 0-shot coding success by feeding the model undeniable reality.
+*   **`core.rag_memory`**: A hybrid ChromaDB vector database and episodic JSON ledger system. It separates "active working memory" (short context window) from "long term semantic memory", recalling your preferences seamlessly weeks later.
+*   **`core.model_router`**: ARIA is model agnostic. This router dynamically balances cost, speed, and intelligence. It can route menial bash tasks to local 7B models, complex UI mapping to Vision-Language Models, and intense mathematical reasoning to massive 32B cloud models (NVIDIA endpoints).
+*   **`core.planner`**: A structural directed-acyclic-graph (DAG) creator. When given a massive objective ("Write a full game"), it fragments the workload into a checklist, operating as an autonomous software director.
 
-### Layer 1: React + Zustand Presentation (The GUI)
-The `/aria-enterprise` dashboard orchestrates state via a global `useAriaStore.js`. Data is polled exactly every 2000ms natively. The UI is built using plain CSS modules emphasizing frosted glass, dark-mode styling, and instantaneous updates across all charts (Recharts) and widgets.
+### Sensory & Motor Control
+*   **`core.browser_agent`**: A hybrid stealth web navigator. It dynamically switches between raw `httpx` logic, Javascript-executing headless `scrapling`, and remote Chrome DevTools Protocol (`Playwright CDP`) evasion techniques to bypass Bot Protection grids. 
+*   **`core.vision_engine`**: Connects directly to Wayland `grim` or `slurp` to take instantaneous screenshots. It runs localized Tesseract OCR for text reading or zero-shot VLM parsing so ARIA can physically "see" your desktop interfaces.
+*   **`core.voice_tts`**: Offline, instantaneous text-to-speech processing utilizing Piper ONNX binaries, allowing ARIA to verbalize critical proactive alerts or chat functionality directly to your speakers.
 
-### Layer 2: Rust Tauri IPC Bridge
-The frontend does **not** rely on slow HTTP Python servers. Instead, `/src-tauri/src/lib.rs` provides direct memory and CPU pointers (`sysinfo`), reads logs directly from systemd using `journalctl`, and executes system commands through native Rust bindings.
-
-### Layer 3: Python Intelligence Core
-The core Python engine manages inference routing, context loading, and task orchestration:
-- **`core/agent_loop.py`:** Evaluates LLM outputs, executes shell commands via `asyncio.to_thread` to prevent GIL locks, and tracks `_executed_commands` to prevent duplicate action starvation.
-- **`core/rag_memory.py`:** Leverages ChromaDB local embeddings. Pushes continuous interactions into episodic storage and long-term memory retrieval pipelines.
-- **`core/model_router.py`:** Intelligently switches models (e.g. smaller 7B models for validation, 32B models for reasoning) based on internal load metrics.
-
-### Layer 4: Capability Exoskeleton (Skills)
-Tools dynamically augment ARIA's reach. The `skills/` directory houses specialized agents ranging from **Clipboard Management** (Wayland) to **Speech-to-Text** (Whisper). ARIA dynamically parses the AST of these scripts on runtime.
+### System Safety & Healing
+*   **`core.proactive_monitor`**: A relentless watcher. Checks `systemd` error logs, CPU thermals, and memory overloads. If an app crashes, ARIA can automatically diagnose the dump log before you even realize a crash occurred.
+*   **`core.skill_evolver`**: Truly evolutionary code. If ARIA uses a Python tool and it crashes due to a library update, the Evolver reads the AST traceback, writes a patch to fix the script, overwrites the python file, and resumes operation seamlessly.
 
 ---
 
-## 🔍 Module Deep-Dive
+## 🕸️ 3. The ARIA Action Matrix (Skills & Sub-Agents)
 
-### The Execution Loop (`agent_loop.py`)
-At the heart of ARIA lies an infinite autonomous loop ensuring tasks are seen to completion:
-*   **Duplicate Detection:** `code_stripped in self._executed_commands`. If ARIA attempts a failed bash command identically twice, the engine intervenes, injecting a cognitive correction prompt (`OBSERVATION: You already ran this exact command`).
-*   **Failure Thresholds:** `MAX_CONSECUTIVE_FAILURES = 5`. If an agent is stuck, it deliberately aborts the sub-routine and asks the human operator via a `[ASK]` tag.
-*   **Safe Code Extraction:** Employs precise RegEx masking to parse generated bash, python, or JS segments out of raw LLM streams while discarding markdown padding.
+ARIA's reach extends through the `skills/` directory—a registry of 30+ highly specialized python plugins parsed on script startup. By annotating a function with `@aria_skill`, it instantly becomes an actionable Tool-Call Schema for the LLM. 
 
-### Multimodal Deep Research Router (`deep_research_v4.py`)
-A masterclass in OSINT aggregation. Unlike basic search implementations, `v4` acts like a synthetic human analyst:
-1.  **Stage 1 (GitHub API):** Specifically filters for recent repositories (`pushed:>2023-01-01`), avoids generic massive repos (`stars:<100000`), and scrapes the first 25 repository `README.md` files.
-2.  **Stage 2 (Awesome Lists):** Programmatically queries `awesome {topic}` on GitHub, fetching curated markdown indices and extracting their hyperlinked repositories automatically.
-3.  **Stage 3 & 4 (DDG & Reddit):** Falls back to raw `DynamicFetcher` HTML scraping when APIs rate-limit, utilizing `trafilatura` to extract the dense semantic article cores while dropping headers/footers.
-4.  **Stage 5 (Personal Intercept):** Hooks into the local `~/.personal_data` directory, running `pytesseract` OCR on images and `fitz` (PyMuPDF) on local documents, injecting your private context into the research synthesis.
+<details>
+<summary><b>🛠️ View the Full 30+ Skill Roster</b></summary>
+<br>
 
----
+| Domain | Skill Script | Capability |
+| :--- | :--- | :--- |
+| **Deep Research** | `deep_research_v4.py` | 6-stage web crawler combining Reddit, HN, GitHub APIs, and local personal-data hooks into triple-pass LLM syntheses. |
+| **Mesh Network** | `mesh_agent.py` | Exposes local ARIA reasoning over a Cloudflare Tunnel reverse proxy for remote cross-device collaboration. |
+| **System Security** | `network_security_scanner.py` | Autonomous Nmap parsing, vulnerability assessments, and local systemd log auditing. |
+| **OS Control** | `desktop_agent.py` | `ydotool` window clicker, `hyprctl` window switcher, volume adjustments via Pipewire control. |
+| **Local LLM** | `local_llm_inference.py` | Offline model loading when disconnected from the internet. |
+| **Vision & UI** | `computer_vision_ocr.py` | Real-time desktop coordinate calculations via OCR matrix mappings. |
+| **Data Syncer** | `data_backup_encrypted.py` | Hardware-encrypted tarball archives synced across connected ADB Android phones or separate drives. |
+| **Media** | `movies4u_downloader.py`, `media_transcoding_amd.py` | CLI media scrapers utilizing OpenCL encoding via AMD RDNA hardware. |
+| **File Manipulation**| `pdf_manipulation.py`, `image_editor.py` | Merge, split, read PDFs. Crop, watermark, or auto-enhance images blindly via Pillow. |
+| **Automation** | `android_adb_automation.py` | Rooted Android UI manipulation, scrcpy integration, tapping, swiping, pushing APKs. |
+| **Work ERP** | `adypu_erp_login.py` | Intricate web automation for university/employment ERP portals, extracting assignments seamlessly. |
+| **Crypto/Password**| `password_manager_cli.py` | Interface wrapper for `pass` or Bitwarden, decrypting logic strictly in isolated memory segments. |
+| **File Systems** | `terminal_file_manager.py` | Advanced regex-based grepping, zsh script executions, dynamic permission audits. |
 
-## ⚙️ Enterprise Dashboard Domains
-
-The `aria-enterprise` GUI covers 12 dedicated operation panels. 
-
-### 1. Command Center
-The tactical overview. Displays Recharts visualizations of your AMD Ryzen CPU cores, memory swap utilization, and active task loads. Features quick-actions to flush RAG context, restart the underlying `systemd` daemon, or wipe temporary context. 
-
-### 2. Agent Foundry
-Create, clone, and kill autonomous sub-agents. You can visually alter their maximum token thresholds, update their system prompts dynamically, and see exact activity state indicators (`IDLE`, `THINKING`, `EXECUTING`). 
-
-### 3. Skill Matrix
-A real-time visualizer of the `skills/` directory. Rather than reloading the daemon to add functionality, use the inline Monaco Code Editor to live-script Python tools. ARIA will automatically identify syntax validity and add the tools to its schema parameters. 
-
-### 4. Context Core & Telemetry
-- **Telemetry:** Built as a pseudo-terminal streaming local Rust IPC `journalctl` lines up to 500 lines deep. Auto-scrolls and color-codes `INFO`, `WARN`, and `ERROR` outputs natively. 
-- **Context Core:** Direct access to `memory.json`. Edit the exact key-value facts that ARIA remembers about you, your workflows, or your preferences. 
-
-### 5. Security & Vault
-The paranoid environment configuration. Use the Vault to edit API keys which are stored securely out-of-git. Configure the Sudo Lock which explicitly monitors and blocks `rm -rf`, `chown`, and root-level commands executing physically on the Arch host without two-factor approval. 
+</details>
 
 ---
 
-## 🚀 Installation & Deployment
+## 🌐 4. Device Mesh Integration
 
-As ARIA v8 relies heavily on the Tauri backend, the setup requires specific toolchains.
+ARIA is not bound to a single local machine. Using `core/aria_mesh.py`, the system establishes secure encrypted payloads over reversed Cloudflare tunnels. This allows multiple machines (Desktop, Laptop, Raspberry Pi nodes) to trade tokenized commands. 
 
-### 1. Dependency Prerequisites
+- **Swarm Intelligence:** If your low-powered laptop needs to process an intense Deep Research report, it can offload the computation through the ARIA Mesh to your main Arch Desktop node.
+- **REST Telemetry:** The Mesh exposes a 12-endpoint FastAPI server to interact programmatically with ARIA's internals.
+
+---
+
+## 🌌 5. Enterprise GUI Overview (React + Tauri)
+
+Built to mimic the complexity of Google Cloud Console, the `aria-enterprise` dashboard is a masterclass in frontend integration.
+
+### Structural Design & Styling
+We utilize highly customized CSS modules providing deep **Glassmorphic** design elements (`backdrop-filter: blur(16px)`), complex animated gradients, absolute responsive grid frameworks, and extremely curated syntax highlighting. No Tailwind—just performant, absolute raw CSS architectures.
+
+### Functional Domains
+The dashboard dynamically parses the 18 backends via a zero-overhead Rust IPC Bridge (`/src-tauri/src/lib.rs`). 
+
+1.  **Command Center:** Live Recharts CPU load mappers, instantly triggering background agent tasks, global pause switches.
+2.  **Agent Foundry:** Spawn, name, and modify specialized agents. Create a "Coder Agent" restricted to `skills/` executing, while a "Research Agent" operates simultaneously.
+3.  **Live Telemetry:** Forget `tail -f`. The Telemetry dash natively binds to `journalctl -u aria` parsing ERROR/INFO flags with colored regex spans.
+4.  **Device Mesh:** A visual network mapping tool to oversee connected hardware nodes.
+5.  **Skill Matrix:** An embedded Monaco code editor providing local syntax checks on your Python skills. Update a skill graphically—ARIA reloads its memory pipeline seamlessly.
+6.  **Browser Agent:** Monitor active web-scraping footprints, block list metrics, and cache statuses.
+7.  **Personal Info (Context Core):** Direct JSON manipulation of your identity schemas (`identity.yaml`) feeding directly into ARIA's prompt.
+8.  **Automations / Cron Tasks:** A structural DAG viewer for scheduling recurring system commands. 
+9.  **Comm-Link:** The chat bridge. Attach directories, images, or PDFs to chat prompts instantly using optimized multi-modal protocols.
+10. **Security Center:** Edit Vault configurations. Activate the `Sudo Lock`—a permission layer rejecting potentially destructive actions without MFA.
+11. **Models / LLMs:** Adjust inference endpoints from Ollama to vLLM to generic OpenAI protocols with real-time ping latency charts.
+12. **Workspace:** Overview and hot-swaps of working directories preventing ARIA from scanning invalid trees.
+
+---
+
+## 🚀 6. Installation & Deployment Architecture
+
+Due to the convergence of Python backend logic and Rust Frontend compilations, follow these strict steps. 
+
+### Step 1: Core System Prerequisites (Arch Linux)
 ```bash
-# Arch Linux System Requirements
+# ARIA requires rigorous structural tooling on Wayland/Arch environments:
 sudo pacman -S base-devel rust cargo nodejs npm jq \
                webkit2gtk tesseract tesseract-data-eng \
-               chromium poppler curl
+               chromium poppler curl ydotool wl-clipboard
 ```
 
-### 2. Core Python Intelligence
-ARIA operates exclusively in Python 3.12+ virtual environments. 
+### Step 2: Bootstrapping the Python Engine
+ARIA exclusively supports Python 3.12+ virtual environments to prevent library conflicts with Arch Linux's rigid pacman python structure.
 ```bash
 git clone https://github.com/GamerX3560/Aria-V-7.1.git aria
 cd aria
 
-# Install dependencies (requires pip)
+# Isolate the environment
+python -m venv .venv
+source .venv/bin/activate
+
+# Install the monstrous requirement matrix
 pip install -r requirements.txt
 playwright install --with-deps chromium
 
-# Initialize the daemon background worker
+# Initialize structural subdirectories and background keys
 bash setup.sh
 ```
 
-### 3. Desktop UI Compilation (Tauri Rust)
+### Step 3: Compiling the Rust/Tauri Enterprise Dashboard
+The UI exists inside `/aria-enterprise`.
+
 ```bash
 cd aria-enterprise
 
-# Install all Vite/React modules
+# Sync massive Node modules (React 19, Zustand, Recharts, Lucide, Monaco)
 npm install
 
-# Start the developer debug GUI (hot reloading capabilities)
+# Start the interactive UI in Debug Watch Mode (ideal for developing UI)
 npx tauri dev
 
-# Compile the final native Release Binary (for deployment to standard usage)
+# Compile the highly-optimized standalone Native Desktop Release Binary
 npx tauri build
 ```
-Once the final build concludes, your optimized binary will be located in `/aria-enterprise/src-tauri/target/release/app`. You can link this executable to a `.desktop` shortcut for seamless system integration.
+The compiled binary outputs to `/aria-enterprise/src-tauri/target/release/app`. Execute it directly or link it to `~/.local/share/applications/aria.desktop` for system search availability.
 
 ---
 
-## 🛡️ Security Footprint
+## 🔒 7. Advanced Configurations & Security Paranoia
 
-ARIA ensures maximum user safety.
-- **Git-Ignored Keys:** Token configurations are stored solely in `vault/credentials.json` which is aggressively excluded by `.gitignore` checks.
-- **Non-Nvidia Hardware:** Built to operate out-of-the-box utilizing CPU or OpenCL/ROCm architectures without failing when missing CUDA.
-- **Execution Sandboxing:** Sub-agents evaluate shell scripts in temporary user environments separated from high-privilege host sectors.
+By design, all API keys or context settings must not be pushed. They are mapped out in structural YAML / JSON files located at the project root:
+
+*   **`identity.yaml`**: Your persona. Who are you? What hardware do you run? What shells do you prefer? ARIA reads this into its memory upon boot so you never have to repeat "use zsh, not bash".
+*   **`config.yaml`**: Define your model endpoints (e.g. `base_url: http://localhost:11434/v1`), token limits, fallback models, and telemetry polling intervals.
+*   **`vault/credentials.json`**: This file is completely ignored by Git. Here lies your massive `NVIDIA_API_KEY`, `GITHUB_TOKEN`, or Cloudflare tunnel secrets. ARIA's `encrypted_storage.py` parses this strictly in memory upon boot.
+*   **`memory.json`**: The episodic ledger. If it grows too large, the DAG planner automatically runs a summary compression loop in the background, pruning dead data while retaining semantic weights.
+
+---
+
+## 🤝 8. Expanding the Ecosystem
+
+Extending ARIA is as simple as dropping a new python logic file into `/skills`. 
+
+```python
+# Example: skills/my_new_skill.py
+from core.skill_loader import aria_skill
+
+@aria_skill
+def format_user_drive(disk_name: str) -> str:
+    """
+    Destroys the user disk. ARIA reads this docstring automatically to understand what the skill does.
+    """
+    return "Complete! Awaits further instructions."
+```
+
+Upon restart, `skill_loader.py` uses AST parsing to serialize the docstring and function parameters directly into a JSON Tool Call Schema for the LLM. No rigid boilerplate required.
 
 ---
 
 <div align="center">
-<i>"Intelligence is the ability to adapt to change. ARIA forces the change."</i><br/>
-<b>Maintained exclusively by GamerX3560</b>
+<i>"Intelligence is the ability to adapt to change. ARIA doesn't adapt. ARIA forces the change."</i><br/>
+<b>Written and Maintained exclusively by GamerX3560</b>
 </div>
