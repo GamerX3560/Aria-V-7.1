@@ -1,0 +1,72 @@
+[
+  {
+    "name": "LLM agentic web crawling architectures",
+    "description": "Research papers and repos on autonomous LLM agents that intelligently navigate, click, and crawl the web for deep research (2025-2026 methodologies).",
+    "type": "science",
+    "level": 3,
+    "min_year": 2024
+  },
+  {
+    "name": "ultra fast asynchronous data collection pipelines python",
+    "description": "Innovative architectures for scaling web scraping to 10,000+ URLs concurrently with minimal memory usage and extreme speed.",
+    "type": "tech",
+    "level": 3,
+    "min_year": 2023
+  },
+  {
+    "name": "semantic text extraction boilerplate removal algorithms",
+    "description": "Advanced ML/heuristic algorithms (beyond basic Trafilatura/Readability) to perfectly extract pure article content and discard all noise, ads, and navbars.",
+    "type": "science",
+    "level": 3,
+    "min_year": 2023
+  },
+  {
+    "name": "search result quality year based filtering heuristics",
+    "description": "Algorithms and heuristics to analyze if a web page or code repo is outdated vs evergreen, weighting freshness, maintenance, and actual relevance.",
+    "type": "science",
+    "level": 3,
+    "min_year": 2023
+  },
+  {
+    "name": "large scale unstructured data synthesis LLM",
+    "description": "How to feed thousands of scraped URLs into LLMs (GraphRAG, long-context, MapReduce variants) to synthesize massive amounts of text into powerful insights.",
+    "type": "science",
+    "level": 3,
+    "min_year": 2025
+  },
+  {
+    "name": "dynamic topic routing query generation agent",
+    "description": "How autonomous agents dynamically decide whether to search GitHub, arXiv, or specialized forums based on the real-time context of the research.",
+    "type": "tech",
+    "level": 3,
+    "min_year": 2024
+  },
+  {
+    "name": "bypassing modern anti bot cloudflare web scraping",
+    "description": "Innovative 2025/2026 security methods to evade advanced Cloudflare Turnstile, Datadome, and Akamai during massive ethical data collection.",
+    "type": "security",
+    "level": 3,
+    "min_year": 2025
+  },
+  {
+    "name": "autonomous multi agent research orchestration",
+    "description": "Architectures where multiple specialized agents (searcher, reader, synthesizer, evaluator) parallelize deep web searches simultaneously.",
+    "type": "tech",
+    "level": 3,
+    "min_year": 2024
+  },
+  {
+    "name": "RAG graph knowledge base generation from web",
+    "description": "Automatically converting massive amounts of raw scraped web data into structured knowledge graphs for deep relationship analysis.",
+    "type": "science",
+    "level": 3,
+    "min_year": 2024
+  },
+  {
+    "name": "scalable PDF dossier generation automated reporting",
+    "description": "Automated pipeline methods for rendering dense, highly formatted, semantic intelligence reports into beautiful PDFs programmatically.",
+    "type": "software",
+    "level": 3,
+    "min_year": 2022
+  }
+]

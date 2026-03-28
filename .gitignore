@@ -47,3 +47,10 @@ tools/llama.cpp/
 
 # Playwright browsers
 .playwright/
+vault/
+identity.yaml
+config.yaml
+memory.json
+voice/models/
+__pycache__/
+*.pyc

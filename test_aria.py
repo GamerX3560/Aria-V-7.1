@@ -138,6 +138,26 @@ def test_encrypted_storage():
     store.delete_secret("aria_test_key")
     return f"Encrypted Storage OK, {len(store.list_secrets())} secrets, AES-256"
 
+def test_browser_agent():
+    from core.browser_agent import BrowserAgent
+    ba = BrowserAgent()
+    status = ba.get_status()
+    assert "Scrapling ✅" in status
+    assert "browser-use ✅" in status
+    assert "Playwright ✅" in status
+    return f"Browser Agent OK, all 3 layers active"
+
+def test_aria_mesh():
+    from core.aria_mesh import ARIAMesh
+    mesh = ARIAMesh(instance_name="test-aria")
+    assert mesh.instance_id
+    assert "execute" in mesh.capabilities
+    # Test peer registration
+    peer = mesh.register_peer("127.0.0.1", port=9999, name="test-peer")
+    assert peer.name == "test-peer"
+    mesh.remove_peer(peer.peer_id)
+    return f"ARIA Mesh OK, caps={','.join(mesh.capabilities)}"
+
 # ─── Skill Tests ──────────────────────────────────────────
 
 def test_skills_importable():
@@ -194,6 +214,8 @@ if __name__ == "__main__":
         ("Core: Voice TTS", test_voice_tts),
         ("Core: Vision Engine", test_vision_engine),
         ("Core: Encrypted Storage", test_encrypted_storage),
+        ("Core: Browser Agent", test_browser_agent),
+        ("Core: ARIA Mesh", test_aria_mesh),
         ("Skills: Importable", test_skills_importable),
         ("System: Tools Installed", test_system_tools),
     ]

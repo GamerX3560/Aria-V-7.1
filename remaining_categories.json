@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Python PDF generation WeasyPrint vs ReportLab",
+    "description": "Evaluate the fastest, most beautiful ways to turn Markdown or HTML into a polished, styled PDF in a Python CLI environment.",
+    "type": "tech",
+    "level": 2,
+    "min_year": 2022
+  },
+  {
+    "name": "Python academic paper fetching SDKs arxiv scholarly",
+    "description": "Analyze libraries to programmatically search, fetch, and parse academic papers, journals, and arxiv preprints in Python.",
+    "type": "science",
+    "level": 2,
+    "min_year": 2021
+  },
+  {
+    "name": "Open source headless browsers Playwright vs Selenium",
+    "description": "Comparison of web automation frameworks for crawling highly obfuscated, Javascript-heavy single-page applications.",
+    "type": "tech",
+    "level": 2,
+    "min_year": 2023
+  }
+]
