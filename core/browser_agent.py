@@ -89,25 +89,29 @@ class BrowserAgent:
             from scrapling import StealthyFetcher
             
             fetcher = StealthyFetcher()
-            page = fetcher.fetch(url)
+            # StealthyFetcher uses sync Playwright internally,
+            # must run in a thread to avoid blocking the async loop
+            page = await asyncio.to_thread(fetcher.fetch, url)
+
+            # Scrapling v0.4 returns a Response object — use .css() not .css_first()
+            title_els = page.css("title")
+            title = title_els[0].text if title_els else ""
 
             result = {
                 "url": url,
-                "title": page.css_first("title").text() if page.css_first("title") else "",
+                "title": title,
                 "status": "success",
             }
 
             if css_selector:
                 elements = page.css(css_selector)
-                result["selected"] = [el.text() for el in elements]
+                result["selected"] = [el.text for el in elements]
                 result["selected_count"] = len(elements)
             else:
                 # Extract main text content
-                body = page.css_first("body")
-                if body:
-                    # Remove script/style tags for clean text
-                    text = body.text()
-                    # Trim to reasonable size
+                body_els = page.css("body")
+                if body_els:
+                    text = body_els[0].get_all_text()
                     result["text"] = text[:8000] if len(text) > 8000 else text
                 else:
                     result["text"] = ""
@@ -115,10 +119,10 @@ class BrowserAgent:
             if extract_links:
                 links = []
                 for a in page.css("a[href]"):
-                    href = a.attrs.get("href", "")
-                    text = a.text().strip()
+                    href = a.attrib.get("href", "")
+                    link_text = str(a.text).strip() if a.text else ""
                     if href and not href.startswith("#") and not href.startswith("javascript:"):
-                        links.append({"text": text[:100], "href": href})
+                        links.append({"text": link_text[:100], "href": href})
                 result["links"] = links[:50]
 
             return result
