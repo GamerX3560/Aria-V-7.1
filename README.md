@@ -16,121 +16,140 @@
 
 ---
 
-## ⚡ Key Innovations in v8.0
+## ⚡ Executive Summary & Innovations
 
-- **🖥️ Enterprise GUI (Desktop Manager):** A brand new React 19 + Tauri 2.0 interface featuring glassmorphic design, 14 advanced panes, and sub-millisecond Rust IPC bridge latency.
-- **🧠 Advanced RAG Memory:** ChromaDB-backed vector memory system that ensures hyper-contextual conversation continuity.
-- **🕷️ Multi-Layer Browser Agent:** Integrated Scrapling, requests, and Playwright CDP automation for undetectable AI web interaction and scraping.
-- **🌐 ARIA Mesh Network:** Distributed processing topology letting multiple devices orchestrate and trade intelligence tasks asynchronously via reverse Cloudflare tunnels.
-- **🎛️ Agent Foundry:** Dynamic creation and modification of specialized sub-agents dynamically assembled by the Master Router.
+ARIA v8.0 is a complete rewrite of the intelligence backend coupled with a massive GUI front-end overhaul. It is designed to run entirely locally, maximizing privacy and leveraging local hardware (e.g., AMD ROCm architecture, Wayland/Hyprland ecosystems). 
 
----
-
-## 🏗️ Architecture Overview
-
-The ARIA architecture consists of a highly optimized 4-tier stack:
-
-1. **Frontend View (React 19 + Vite + Zustand):**  
-   Provides a massive dashboard including Live Telemetry, Skill Matrix, Agent Foundry, and a fully interactive Command Center. 
-2. **IPC Integration Bridge (Tauri + Rust):**  
-   Zero-overhead system calls. Processes real-time hardware telemetry (`sysinfo`), filesystem walking for skills, and `systemd` journalctl log streaming natively in Rust before feeding it to React.
-3. **Core Orchestration Engine (Python):**  
-   The `agent_loop.py` and `router.py` process loop. Manages model routing (Qwen, Llama, Gemma via Ollama/vLLM), async task execution, and sub-agent life cycles.
-4. **Execution Layer & Mesh:**  
-   Docker sandboxes, native tool execution nodes, and Playwright chromium processes handling the physical side-effects of ARIA's decisions.
+### Major Features
+1. **Enterprise Desktop Manager (GUI):** Built on Tauri 2.0 and React 19, featuring sub-millisecond Rust IPC bridges, glassmorphic UI, and 14 independent control panels spanning telemetry to active agent orchestration.
+2. **Infinite Execution Loop:** `agent_loop.py` features a highly advanced, self-healing execution engine. It tracks its own consecutive failures, avoids duplicate error traps, and utilizes a "stuck detection" guard that breaks infinite loops intelligently.
+3. **Multi-Modal Deep Research (v4):** The `deep_research_v4.py` agent acts as a crawler with 6 sequential deep-dive stages: GitHub API search, Awesome Lists integration, DuckDuckGo multi-page crawls, Reddit/Hackernews scrapes, Arch Wiki extraction, and triple-pass LLM distillation.
+4. **Context Injection Engine:** ARIA intercepts local user data (`~/.personal_data/`, OCR'd screenshots, PDFs) and merges them seamlessly with active RAG DB (ChromaDB) retrievals to assemble perfectly contextual prompts prior to inference.
+5. **Zero-Shot System Integration:** Full manipulation of Arch Linux environments (via Wayland, PipeWire, `systemd`, `ydotool`) without human supervision. 
 
 ---
 
-## 🧩 The 18 Subsystems
+## 🏗️ Advanced Architecture
 
-ARIA v8 delegates reasoning to specialized sub-modules built inside `core/` and `skills/`:
+ARIA is partitioned into four distinct operational layers connected via IPC commands and UNIX sockets.
 
-| Module | Engine | Responsibility |
-|:---|:---|:---|
-| **Context Engine** | `core.context_engine` | Assembles the sliding context window for exact prompt injection. |
-| **Model Router** | `core.model_router` | Dynamically selects the cheapest/fastest LLM for a given task complexity. |
-| **Proactive Monitor**| `core.proactive_monitor` | Background worker that checks sys-vitals and throws proactive alerts. |
-| **Browser Agent** | `core.browser_agent` | 3-tier scraping engine (HTTP → Scrapling → Remote CDP Playwright). |
-| **Vision Engine** | `core.vision_engine` | Fast OCR and zero-shot VLM capability for reading GUI screens. |
-| **Voice TTS** | `core.voice_tts` | Offline Piper ONNX speech synthesis with customizable pitch/rate. |
-| **Skill Evolver** | `core.skill_evolver` | AI module that watches errors and rewrites its own Python tools to self-heal. |
-| **Security Center** | `core.encrypted_storage`| Secures API keys using local hardware encryption. |
+```mermaid
+graph TD
+    A[React 19 / Zustand Frontend] -->|Tauri IPC Call| B(Rust Tauri Bridge)
+    B -->|UNIX Socket/System Monitor| C{Native System}
+    B -->|File I/O Watcher| D[Python Engine]
+    D --> E[Model Router]
+    E --> F[Qwen 2.5 Coder]
+    D --> G[Deep Research Agents]
+    D --> H[Browser Automator]
+    H --> I[Playwright CDP]
+```
 
----
+### Layer 1: React + Zustand Presentation (The GUI)
+The `/aria-enterprise` dashboard orchestrates state via a global `useAriaStore.js`. Data is polled exactly every 2000ms natively. The UI is built using plain CSS modules emphasizing frosted glass, dark-mode styling, and instantaneous updates across all charts (Recharts) and widgets.
 
-## 🌌 The Desktop Manager
+### Layer 2: Rust Tauri IPC Bridge
+The frontend does **not** rely on slow HTTP Python servers. Instead, `/src-tauri/src/lib.rs` provides direct memory and CPU pointers (`sysinfo`), reads logs directly from systemd using `journalctl`, and executes system commands through native Rust bindings.
 
-Navigate to `aria-enterprise/` to access the Tauri-based GUI. The 12 primary domains include:
+### Layer 3: Python Intelligence Core
+The core Python engine manages inference routing, context loading, and task orchestration:
+- **`core/agent_loop.py`:** Evaluates LLM outputs, executes shell commands via `asyncio.to_thread` to prevent GIL locks, and tracks `_executed_commands` to prevent duplicate action starvation.
+- **`core/rag_memory.py`:** Leverages ChromaDB local embeddings. Pushes continuous interactions into episodic storage and long-term memory retrieval pipelines.
+- **`core/model_router.py`:** Intelligently switches models (e.g. smaller 7B models for validation, 32B models for reasoning) based on internal load metrics.
 
-### Core Ops
-*   **Command Center:** Live CPU/RAM/GPU monitoring, service health vitals, and one-click quick action flush commands.
-*   **Agent Foundry:** Create, edit, and orchestrate multiple personalized AI agents operating simultaneously.
-*   **Skill Matrix:** A file system explorer with an embedded Monaco code editor to view, write, and validate Python sub-routines live.
-*   **Context Core:** Read and manipulate the exact ChromaDB vector knowledge chunks currently injected into ARIA's logic.
-
-### Supervision
-*   **Live Telemetry:** A stylized terminal pulling live `journalctl` error/info streams from the Python backend service.
-*   **Comm-Link:** Standard interaction chat portal with multi-modal attachments.
-*   **Task Orchestrator:** CRON-like graphical manager for recurring AI tasks.
-*   **Device Mesh:** Visualized topology of all connected remote ARIA nodes.
-*   **Browser Agent:** Monitor currently active autonomous webpage parsing or active browser interaction footprints.
+### Layer 4: Capability Exoskeleton (Skills)
+Tools dynamically augment ARIA's reach. The `skills/` directory houses specialized agents ranging from **Clipboard Management** (Wayland) to **Speech-to-Text** (Whisper). ARIA dynamically parses the AST of these scripts on runtime.
 
 ---
 
-## 🚀 Installation & Build Guide
+## 🔍 Module Deep-Dive
 
-### 1. Prerequisites
-You must have the following dependencies installed on your system:
-- **Rust & Cargo** (For Tauri backend)
-- **Node.js (v20+) & npm** (For React frontend)
-- **Python 3.12+** (For core intelligence)
-- **ChromaDB & Playwright** (Python libraries)
-- `systemd` for Linux background execution.
+### The Execution Loop (`agent_loop.py`)
+At the heart of ARIA lies an infinite autonomous loop ensuring tasks are seen to completion:
+*   **Duplicate Detection:** `code_stripped in self._executed_commands`. If ARIA attempts a failed bash command identically twice, the engine intervenes, injecting a cognitive correction prompt (`OBSERVATION: You already ran this exact command`).
+*   **Failure Thresholds:** `MAX_CONSECUTIVE_FAILURES = 5`. If an agent is stuck, it deliberately aborts the sub-routine and asks the human operator via a `[ASK]` tag.
+*   **Safe Code Extraction:** Employs precise RegEx masking to parse generated bash, python, or JS segments out of raw LLM streams while discarding markdown padding.
 
-### 2. Backend Engine Initialization
+### Multimodal Deep Research Router (`deep_research_v4.py`)
+A masterclass in OSINT aggregation. Unlike basic search implementations, `v4` acts like a synthetic human analyst:
+1.  **Stage 1 (GitHub API):** Specifically filters for recent repositories (`pushed:>2023-01-01`), avoids generic massive repos (`stars:<100000`), and scrapes the first 25 repository `README.md` files.
+2.  **Stage 2 (Awesome Lists):** Programmatically queries `awesome {topic}` on GitHub, fetching curated markdown indices and extracting their hyperlinked repositories automatically.
+3.  **Stage 3 & 4 (DDG & Reddit):** Falls back to raw `DynamicFetcher` HTML scraping when APIs rate-limit, utilizing `trafilatura` to extract the dense semantic article cores while dropping headers/footers.
+4.  **Stage 5 (Personal Intercept):** Hooks into the local `~/.personal_data` directory, running `pytesseract` OCR on images and `fitz` (PyMuPDF) on local documents, injecting your private context into the research synthesis.
+
+---
+
+## ⚙️ Enterprise Dashboard Domains
+
+The `aria-enterprise` GUI covers 12 dedicated operation panels. 
+
+### 1. Command Center
+The tactical overview. Displays Recharts visualizations of your AMD Ryzen CPU cores, memory swap utilization, and active task loads. Features quick-actions to flush RAG context, restart the underlying `systemd` daemon, or wipe temporary context. 
+
+### 2. Agent Foundry
+Create, clone, and kill autonomous sub-agents. You can visually alter their maximum token thresholds, update their system prompts dynamically, and see exact activity state indicators (`IDLE`, `THINKING`, `EXECUTING`). 
+
+### 3. Skill Matrix
+A real-time visualizer of the `skills/` directory. Rather than reloading the daemon to add functionality, use the inline Monaco Code Editor to live-script Python tools. ARIA will automatically identify syntax validity and add the tools to its schema parameters. 
+
+### 4. Context Core & Telemetry
+- **Telemetry:** Built as a pseudo-terminal streaming local Rust IPC `journalctl` lines up to 500 lines deep. Auto-scrolls and color-codes `INFO`, `WARN`, and `ERROR` outputs natively. 
+- **Context Core:** Direct access to `memory.json`. Edit the exact key-value facts that ARIA remembers about you, your workflows, or your preferences. 
+
+### 5. Security & Vault
+The paranoid environment configuration. Use the Vault to edit API keys which are stored securely out-of-git. Configure the Sudo Lock which explicitly monitors and blocks `rm -rf`, `chown`, and root-level commands executing physically on the Arch host without two-factor approval. 
+
+---
+
+## 🚀 Installation & Deployment
+
+As ARIA v8 relies heavily on the Tauri backend, the setup requires specific toolchains.
+
+### 1. Dependency Prerequisites
+```bash
+# Arch Linux System Requirements
+sudo pacman -S base-devel rust cargo nodejs npm jq \
+               webkit2gtk tesseract tesseract-data-eng \
+               chromium poppler curl
+```
+
+### 2. Core Python Intelligence
+ARIA operates exclusively in Python 3.12+ virtual environments. 
 ```bash
 git clone https://github.com/GamerX3560/Aria-V-7.1.git aria
 cd aria
 
-# Install core python intelligence
+# Install dependencies (requires pip)
 pip install -r requirements.txt
 playwright install --with-deps chromium
 
-# Execute the local daemon
+# Initialize the daemon background worker
 bash setup.sh
 ```
 
-### 3. Build & Run the Enterprise GUI
-To compile the glassmorphic React Dashboard into a native desktop app:
-
+### 3. Desktop UI Compilation (Tauri Rust)
 ```bash
 cd aria-enterprise
 
-# Install JS dependencies
+# Install all Vite/React modules
 npm install
 
-# Run Desktop App in Development Mode
+# Start the developer debug GUI (hot reloading capabilities)
 npx tauri dev
 
-# Compile Release Native Application (.AppImage / .deb / .rpm)
+# Compile the final native Release Binary (for deployment to standard usage)
 npx tauri build
 ```
+Once the final build concludes, your optimized binary will be located in `/aria-enterprise/src-tauri/target/release/app`. You can link this executable to a `.desktop` shortcut for seamless system integration.
 
 ---
 
-## 🔒 Security & Privacy
+## 🛡️ Security Footprint
 
-ARIA v8 is built with a **local-first** paranoia architecture:
-*   **Local Inference:** Defaults to strictly local models (e.g., Qwen 2.5 Coder 32B).
-*   **Token Vault:** All secret tokens (GitHub, Weather, APIs) are read from `.gitignore` enforced directories `vault/credentials.json`.
-*   **Sandboxing:** Execution capabilities can be locked behind the "Sudo Lock" in the Security Center GUI.
-
----
-
-## 🛠️ Extensibility & Custom Skills
-
-ARIA is a blank canvas. To extend ARIA's capabilities, simply drop a new `.py` file into the `skills/` directory. 
-The **Skill Loader** automatically detects new functions decorated with `@aria_skill`, parses their docstrings via AST, and registers them dynamically into the LLM Tool Call schema.
+ARIA ensures maximum user safety.
+- **Git-Ignored Keys:** Token configurations are stored solely in `vault/credentials.json` which is aggressively excluded by `.gitignore` checks.
+- **Non-Nvidia Hardware:** Built to operate out-of-the-box utilizing CPU or OpenCL/ROCm architectures without failing when missing CUDA.
+- **Execution Sandboxing:** Sub-agents evaluate shell scripts in temporary user environments separated from high-privilege host sectors.
 
 ---
 
