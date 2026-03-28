@@ -46,13 +46,14 @@ DEFAULT_PORT = 8741  # ARIA mesh default port
 class ARIAPeer:
     """Represents a known ARIA instance."""
     def __init__(self, peer_id: str, host: str, port: int, name: str = "",
-                 capabilities: List[str] = None, last_seen: float = 0):
+                 capabilities: List[str] = None, last_seen: float = 0, public_url: str = ""):
         self.peer_id = peer_id
         self.host = host
         self.port = port
         self.name = name or f"aria-{peer_id[:8]}"
         self.capabilities = capabilities or []
         self.last_seen = last_seen or time.time()
+        self.public_url = public_url
         self.status = "unknown"
 
     def to_dict(self) -> dict:
@@ -63,6 +64,7 @@ class ARIAPeer:
             "name": self.name,
             "capabilities": self.capabilities,
             "last_seen": self.last_seen,
+            "public_url": self.public_url,
             "status": self.status,
         }
 
@@ -375,13 +377,53 @@ class ARIAMesh:
             server = uvicorn.Server(config)
             self._running = True
             self._server_task = asyncio.create_task(server.serve())
-            log.info(f"Mesh server started on port {self.port}")
+            log.info(f"Mesh server started on LAN port {self.port}")
+
+            # Also start internet tunnel
+            asyncio.create_task(self._start_internet_tunnel())
 
         except ImportError:
             log.warning("FastAPI/uvicorn not installed. Mesh server disabled.")
             log.warning("Install: pip install fastapi uvicorn")
         except Exception as e:
             log.error(f"Mesh server failed: {e}")
+
+    async def _start_internet_tunnel(self):
+        """Spins up a free Cloudflare tunnel so mesh is accessible anywhere."""
+        cf_bin = ARIA_DIR / "bin" / "cloudflared"
+        if not cf_bin.exists():
+            log.info("cloudflared not found, mesh will be LAN-only. Install cloudflared to enable internet mesh.")
+            return
+
+        import asyncio
+        import subprocess
+        import re
+        try:
+            log.info("Starting public internet tunnel for ARIA Mesh...")
+            proc = await asyncio.create_subprocess_exec(
+                str(cf_bin), "tunnel", "--url", f"http://localhost:{self.port}",
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE
+            )
+            
+            # Read stderr line by line looking for the trycloudflare URL
+            while True:
+                line = await proc.stderr.readline()
+                if not line:
+                    break
+                line_text = line.decode('utf-8').strip()
+                
+                # e.g. "INF Requesting new quick Tunnel on https://xyz.trycloudflare.com"
+                # or "INF |  https://xyz.trycloudflare.com  |"
+                match = re.search(r'https://[a-zA-Z0-9-]+\.trycloudflare\.com', line_text)
+                if match:
+                    self.public_url = match.group(0)
+                    log.warning(f"🌐 ARIA Mesh is now live on the public internet: {self.public_url}")
+                    # Only need to read until we get the URL
+                    break
+                    
+        except Exception as e:
+            log.error(f"Tunnel failed to start: {e}")
 
     def set_task_handler(self, handler):
         """Set the callback function that handles incoming tasks from peers."""
@@ -425,6 +467,7 @@ class ARIAMesh:
                                     capabilities=data.get("capabilities", []),
                                     peer_id=data.get("instance_id"),
                                 )
+                                peer.public_url = data.get("public_url", "")
                                 peer.status = "online"
                                 discovered.append(peer)
             except Exception:
@@ -450,15 +493,22 @@ class ARIAMesh:
         lines = [
             f"🔗 ARIA Mesh Network",
             f"  Instance: {self.instance_name} ({self.instance_id[:8]}...)",
-            f"  Port: {self.port}",
+            f"  Port: {self.port} (LAN)",
+        ]
+        
+        if hasattr(self, 'public_url') and self.public_url:
+            lines.append(f"  Public URI: {self.public_url} (Global)")
+            
+        lines.extend([
             f"  Capabilities: {', '.join(self.capabilities)}",
             f"  Server: {'🟢 Running' if self._running else '⚪ Stopped'}",
             f"  Peers: {online} online / {total} total",
-        ]
+        ])
 
         for pid, peer in self.peers.items():
             icon = "🟢" if peer.status == "online" else "🔴" if peer.status == "offline" else "🟡"
-            lines.append(f"    {icon} {peer.name} ({peer.host}:{peer.port})")
+            peer_loc = peer.public_url if peer.public_url else f"{peer.host}:{peer.port}"
+            lines.append(f"    {icon} {peer.name} ({peer_loc})")
 
         return "\n".join(lines)
 
