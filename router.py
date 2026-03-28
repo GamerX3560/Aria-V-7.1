@@ -186,7 +186,21 @@ def build_system_prompt(user_message: str = "", task_type: str = "default") -> s
     # Skip RAG (ChromaDB embedding, ~1-3s) and vision (3 subprocesses, ~9s)
     if task_type == "fast":
         personality_section = personality_engine.get_style_prompt("neutral")
-        return base + f"\n{personality_section}\n"
+        return base + f"""
+{personality_section}
+
+QUICK REFERENCE — OS SHORTCUTS (use bash blocks for these):
+- Current time/date: `date`
+- RAM usage: `free -h`
+- CPU usage: `top -bn1 | grep "Cpu(s)"`
+- Disk usage: `df -h ~`
+- Window management (Hyprland): `hyprctl dispatch workspace <N>` (switch workspace N)
+- Switch to specific window: `hyprctl dispatch focuswindow <class>`
+- List open windows: `hyprctl clients -j | python3 -c "import json,sys; [print(w['class'],w['title']) for w in json.load(sys.stdin)]"`
+- Volume: `pactl set-sink-volume @DEFAULT_SINK@ <+/-N%>`
+- Brightness: `brightnessctl set <N>%`
+- Open app: `nohup <appname> &>/dev/null &`
+"""
 
     # ── FULL PATH: code, reasoning, file tasks, etc. ─────────────────────────
     context = context_engine.get_full_context()
@@ -294,18 +308,23 @@ async def handle_message(update: Update, context):
                 pass
 
     async def action_callback(msg):
+        """Called when a bash command is about to run.
+        We deliberately do NOT flash the raw command into the status message
+        (that causes the 1-second blink). Instead, show a neutral working indicator."""
         nonlocal last_status_text
-        try:
-            short = msg[:4000]
-            if short != last_status_text:
-                await status_msg.edit_text(short, parse_mode="Markdown")
-                last_status_text = short
-        except Exception:
-            pass
+        working = "🔧 Working..."
+        if working != last_status_text:
+            try:
+                await status_msg.edit_text(working)
+                last_status_text = working
+            except Exception:
+                pass
 
     try:
         # Override model config in the agent loop
         agent.model_name = model_name
+        agent.temperature = temperature
+        agent.max_tokens = max_tokens
         
         result = await agent.run(
             status_callback=status_callback,
