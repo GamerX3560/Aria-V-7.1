@@ -1,0 +1,84 @@
+# ─── Python ───────────────────────────────────────────
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+eggs/
+*.egg
+
+# ─── Node.js ──────────────────────────────────────────
+node_modules/
+npm-debug.log*
+
+# ─── Rust / Tauri Build ──────────────────────────────
+aria-enterprise/src-tauri/target/
+aria-enterprise/dist/
+
+# ─── Personal / Sensitive ────────────────────────────
+identity.yaml
+vault/
+.env
+*.token
+*.credential
+memory.json
+security.json
+vault.json
+
+# ─── Temporary / Generated ───────────────────────────
+*.tmp
+*.bak
+*.swp
+*.swo
+*~
+get-pip.py
+downloads/
+memory/
+10_deep_research_categories.json
+remaining_categories.json
+
+# ─── Logs & Cache ────────────────────────────────────
+*.log
+.cache/
+agents/__pycache__/
+core/__pycache__/
+skills/__pycache__/
+skills/evolved/
+
+# ─── OS Files ─────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.directory
+
+# ─── IDE ──────────────────────────────────────────────
+.vscode/
+.idea/
+*.code-workspace
+
+# ─── Test & Debug ────────────────────────────────────
+test_*.py
+eval_winners.py
+
+# ─── Binaries ────────────────────────────────────────
+aria-enterprise/src-tauri/target/
+*.AppImage
+*.deb
+*.rpm
+
+# ─── Reference / Research ─────────────────────────────
+reference_repos/
+tools/
+memory/
+downloads/
+bin/
+__pycache__/
+docs/
+comms/
+aria-dashboard/
+antigravity_bot.py
+gemini_cli.py
+nvidia_cli.py
+
+repo_sources/

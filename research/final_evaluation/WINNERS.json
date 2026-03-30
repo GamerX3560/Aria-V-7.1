@@ -1,0 +1,326 @@
+[
+  {
+    "winner_name": "AutoGPT",
+    "winner_repo": "Significant-Gravitas/AutoGPT",
+    "winner_url": "https://github.com/Significant-Gravitas/AutoGPT",
+    "install_command": "git clone https://github.com/Significant-Gravitas/AutoGPT.git\ncd AutoGPT\npython -m venv venv\nsource venv/bin/activate\npip install -r requirements.txt",
+    "reason": "AutoGPT is actively maintained, supports a wide range of plugins, has a clear Python API, and is free and open source, making it a versatile choice for building AI agents on Arch Linux with minimal resource usage.",
+    "confidence": 8,
+    "category": "AI agent framework python"
+  },
+  {
+    "winner_name": "n8n-io/n8n",
+    "winner_repo": "n8n-io/n8n",
+    "winner_url": "https://github.com/n8n-io/n8n",
+    "install_command": "yay -S n8n",
+    "reason": "n8n is a powerful, actively maintained workflow automation platform with native AI capabilities, extensive integration support, and runs smoothly on Wayland, meeting all the specified requirements.",
+    "confidence": 9,
+    "category": "MCP model context protocol server"
+  },
+  {
+    "winner_name": "huggingface/transformers",
+    "winner_repo": "huggingface/transformers",
+    "winner_url": "https://github.com/huggingface/transformers",
+    "install_command": "pip install transformers",
+    "reason": "huggingface/transformers is the most comprehensive and widely-used library for state-of-the-art machine learning models, supports AMD GPUs via ROCm, and has a clear Python API.",
+    "confidence": 9,
+    "category": "LLM memory RAG system"
+  },
+  {
+    "winner_name": "n8n",
+    "winner_repo": "n8n-io/n8n",
+    "winner_url": "https://github.com/n8n-io/n8n",
+    "install_command": "sudo pacman -S nodejs npm\nnpm install -g n8n\nn8n",
+    "reason": "n8n is a powerful workflow automation platform with native AI capabilities, actively maintained, and integrates well with various services while using minimal resources.",
+    "confidence": 9,
+    "category": "AI agent orchestration multi-agent"
+  },
+  {
+    "winner_name": "AutoGPT",
+    "winner_repo": "Significant-Gravitas/AutoGPT",
+    "winner_url": "https://github.com/Significant-Gravitas/AutoGPT",
+    "install_command": "sudo pacman -S python python-pip git && git clone https://github.com/Significant-Gravitas/AutoGPT.git && cd AutoGPT && pip install -r requirements.txt",
+    "reason": "AutoGPT is actively maintained, works natively on Arch Linux, has a clear Python API, uses minimal resources, and is free and open source.",
+    "confidence": 8,
+    "category": "self improving AI agent"
+  },
+  {
+    "winner_name": "OpenClaw",
+    "winner_repo": "openclaw/openclaw",
+    "winner_url": "https://github.com/openclaw/openclaw",
+    "install_command": "git clone https://github.com/openclaw/openclaw.git && cd openclaw && sudo pacman -S python python-pip && pip install -r requirements.txt && python openclaw.py",
+    "reason": "OpenClaw is actively maintained, works natively on Arch Linux, has a clear Python API, uses minimal resources, and is free and open source.",
+    "confidence": 8,
+    "category": "AI coding agent terminal"
+  },
+  {
+    "winner_name": "AutoGPT",
+    "winner_repo": "Significant-Gravitas/AutoGPT",
+    "winner_url": "https://github.com/Significant-Gravitas/AutoGPT",
+    "install_command": "git clone https://github.com/Significant-Gravitas/AutoGPT.git\ncd AutoGPT\npip install -r requirements.txt",
+    "reason": "AutoGPT is a powerful, actively maintained, and resource-efficient AI assistant with a clear CLI and Python API, making it well-suited for Arch Linux and Wayland environments.",
+    "confidence": 8,
+    "category": "AI browser automation agent"
+  },
+  {
+    "winner_name": "llama.cpp",
+    "winner_repo": "ggerganov/llama.cpp",
+    "winner_url": "https://github.com/ggerganov/llama.cpp",
+    "install_command": "git clone https://github.com/ggerganov/llama.cpp.git\ncd llama.cpp\nmake",
+    "reason": "llama.cpp is lightweight, efficient, and has good AMD GPU support via ROCm, making it suitable for systems with limited resources and meeting all specified requirements.",
+    "confidence": 8,
+    "category": "local LLM inference engine"
+  },
+  {
+    "winner_name": "Significant-Gravitas/AutoGPT",
+    "winner_repo": "Significant-Gravitas/AutoGPT",
+    "winner_url": "https://github.com/Significant-Gravitas/AutoGPT",
+    "install_command": "git clone https://github.com/Significant-Gravitas/AutoGPT.git\ncd AutoGPT\npip install -r requirements.txt",
+    "reason": "AutoGPT is actively maintained, works natively on Arch Linux, has a clear CLI, uses minimal resources, and is free and open source.",
+    "confidence": 8,
+    "category": "AI voice agent assistant"
+  },
+  {
+    "winner_name": "OpenAI/whisper",
+    "winner_repo": "openai/whisper",
+    "winner_url": "https://github.com/openai/whisper",
+    "install_command": "pip install git+https://github.com/openai/whisper.git && pip install torchaudio",
+    "reason": "OpenAI's Whisper is state-of-the-art for speech-to-text tasks, supports multiple languages, is actively maintained, and integrates well with AMD GPUs via ROCm.",
+    "confidence": 8,
+    "category": "speech to text STT whisper"
+  },
+  {
+    "winner_name": "Mozilla TTS",
+    "winner_repo": "mozilla/TTS",
+    "winner_url": "https://github.com/mozilla/TTS",
+    "install_command": "git clone https://github.com/mozilla/TTS.git\ncd TTS\npython -m venv venv\nsource venv/bin/activate\npip install -r requirements.txt\npip install -e .",
+    "reason": "Mozilla TTS is actively maintained, supports AMD GPUs via ROCm, and provides a clear Python API for integration.",
+    "confidence": 9,
+    "category": "text to speech TTS neural"
+  },
+  {
+    "winner_name": "EasyOCR",
+    "winner_repo": "JaidedAI/EasyOCR",
+    "winner_url": "https://github.com/JaidedAI/EasyOCR",
+    "install_command": "pip install easyocr",
+    "reason": "EasyOCR supports 80+ languages, provides high accuracy, supports GPU acceleration with ROCm, and has a simple API for easy integration.",
+    "confidence": 8,
+    "category": "computer vision OCR screenshot"
+  },
+  {
+    "winner_name": "AUTOMATIC1111/stable-diffusion-webui",
+    "winner_repo": "AUTOMATIC1111/stable-diffusion-webui",
+    "winner_url": "https://github.com/AUTOMATIC1111/stable-diffusion-webui",
+    "install_command": "sudo pacman -S git python python-pip\ngit clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git\ncd stable-diffusion-webui\npip install -r requirements.txt\n./webui.sh",
+    "reason": "It is highly regarded for its comprehensive feature set, user-friendly web interface, strong community support, and runs smoothly on Wayland with AMD GPUs using ROCm.",
+    "confidence": 8,
+    "category": "AI image generation local AMD"
+  },
+  {
+    "winner_name": "Coqui TTS",
+    "winner_repo": "coqui-ai/TTS",
+    "winner_url": "https://github.com/coqui-ai/TTS",
+    "install_command": "git clone https://github.com/coqui-ai/TTS.git && cd TTS && pip install -r requirements.txt",
+    "reason": "Coqui TTS is actively maintained, supports voice cloning, has a clear Python API, and is free and open source.",
+    "confidence": 9,
+    "category": "AI voice cloning local"
+  },
+  {
+    "winner_name": "n8n-io/n8n",
+    "winner_repo": "n8n-io/n8n",
+    "winner_url": "https://github.com/n8n-io/n8n",
+    "install_command": "npm install -g n8n\nn8n start",
+    "reason": "n8n is a powerful, actively maintained workflow automation platform with native AI capabilities, supports a wide range of integrations, and is compatible with Wayland via Hyprland.",
+    "confidence": 8,
+    "category": "linux automation workflow"
+  },
+  {
+    "winner_name": "scrcpy",
+    "winner_repo": "Genymobile/scrcpy",
+    "winner_url": "https://github.com/Genymobile/scrcpy",
+    "install_command": "sudo pacman -S scrcpy",
+    "reason": "scrcpy is lightweight, efficient, supports high frame rates and low latency, works natively on Arch Linux/Wayland, and has a clear CLI for automation.",
+    "confidence": 8,
+    "category": "android ADB automation scrcpy"
+  },
+  {
+    "winner_name": "wf-recorder",
+    "winner_repo": "emersion/wf-recorder",
+    "winner_url": "https://github.com/emersion/wf-recorder",
+    "install_command": "sudo pacman -S wf-recorder",
+    "reason": "wf-recorder is specifically designed for Wayland, has low resource usage, supports AMD GPUs, and is actively maintained.",
+    "confidence": 8,
+    "category": "screen recording wayland"
+  },
+  {
+    "winner_name": "CopyQ",
+    "winner_repo": "hluk/CopyQ",
+    "winner_url": "https://github.com/hluk/CopyQ",
+    "install_command": "sudo pacman -S copyq",
+    "reason": "CopyQ is a powerful clipboard manager with extensive features, excellent Wayland support, and active development, making it the best choice for advanced clipboard management on Arch Linux with Wayland.",
+    "confidence": 8,
+    "category": "clipboard manager wayland"
+  },
+  {
+    "winner_name": "notify",
+    "winner_repo": "nikoksr/notify",
+    "winner_url": "https://github.com/nikoksr/notify",
+    "install_command": "yay -S notify",
+    "reason": "notify is lightweight, simple to use, written in Go, supports multiple notification backends, integrates well with Wayland, and is actively maintained.",
+    "confidence": 8,
+    "category": "smart notification linux"
+  },
+  {
+    "winner_name": "smart_open",
+    "winner_repo": "piskvorky/smart_open",
+    "winner_url": "https://github.com/piskvorky/smart_open",
+    "install_command": "pip install smart_open",
+    "reason": "smart_open is actively maintained, has a clear Python API for handling large files, and uses minimal resources, making it well-suited for file format conversion tasks on Arch Linux.",
+    "confidence": 9,
+    "category": "file format converter universal"
+  },
+  {
+    "winner_name": "OCRmyPDF",
+    "winner_repo": "ocrmypdf/OCRmyPDF",
+    "winner_url": "https://github.com/ocrmypdf/OCRmyPDF",
+    "install_command": "sudo pacman -S ocrmypdf",
+    "reason": "OCRmyPDF is actively maintained, works natively on Arch Linux, has a clear CLI, uses minimal resources, and is free and open source.",
+    "confidence": 8,
+    "category": "PDF manipulation python"
+  },
+  {
+    "winner_name": "Scrapy",
+    "winner_repo": "scrapy/scrapy",
+    "winner_url": "https://github.com/scrapy/scrapy",
+    "install_command": "sudo pacman -S python-scrapy",
+    "reason": "Scrapy is a powerful and flexible web scraping framework for Python, designed for efficiency and ease of use, and it works natively on Arch Linux with minimal resource usage.",
+    "confidence": 9,
+    "category": "web scraping automation AI"
+  },
+  {
+    "winner_name": "nnn",
+    "winner_repo": "jarun/nnn",
+    "winner_url": "https://github.com/jarun/nnn",
+    "install_command": "sudo pacman -S nnn",
+    "reason": "nnn is extremely fast and lightweight, with minimal dependencies, making it highly suitable for systems with limited resources while still offering powerful customization through plugins.",
+    "confidence": 9,
+    "category": "terminal file manager TUI"
+  },
+  {
+    "winner_name": "Glances",
+    "winner_repo": "nicolargo/glances",
+    "winner_url": "https://github.com/nicolargo/glances",
+    "install_command": "sudo pacman -S glances",
+    "reason": "Glances is a comprehensive system monitoring tool with a wide range of metrics, supports multiple output formats, and is highly customizable, making it well-suited for Arch Linux with Wayland.",
+    "confidence": 8,
+    "category": "system monitoring terminal TUI"
+  },
+  {
+    "winner_name": "tweepy",
+    "winner_repo": "tweepy/tweepy",
+    "winner_url": "https://github.com/tweepy/tweepy",
+    "install_command": "yay -S python-tweepy",
+    "reason": "Tweepy is actively maintained, supports all core Twitter API features, has a clear Python API, and uses minimal resources, making it the best choice for social media bot automation on Arch Linux.",
+    "confidence": 9,
+    "category": "social media bot automation API"
+  },
+  {
+    "winner_name": "Google API Client Library for Python",
+    "winner_repo": "googleapis/google-api-python-client",
+    "winner_url": "https://github.com/googleapis/google-api-python-client",
+    "install_command": "pip install --upgrade google-api-python-client",
+    "reason": "It is the official library for Google APIs, ensuring compatibility and comprehensive support, and it uses minimal resources.",
+    "confidence": 8,
+    "category": "gmail API email automation"
+  },
+  {
+    "winner_name": "Sniffnet",
+    "winner_repo": "GyulyVGC/sniffnet",
+    "winner_url": "https://github.com/GyulyVGC/sniffnet",
+    "install_command": "yay -S sniffnet",
+    "reason": "Sniffnet is actively maintained, works natively on Arch Linux with Wayland, has a clear CLI, uses minimal resources, and is free and open source.",
+    "confidence": 8,
+    "category": "network security scanner linux"
+  },
+  {
+    "winner_name": "pass",
+    "winner_repo": "password-store/password-store",
+    "winner_url": "https://www.passwordstore.org/",
+    "install_command": "sudo pacman -S pass",
+    "reason": "pass is a simple, lightweight, and highly extensible password manager that integrates well with Unix systems, uses GPG for encryption, and is actively maintained.",
+    "confidence": 9,
+    "category": "password manager CLI"
+  },
+  {
+    "winner_name": "borg",
+    "winner_repo": "borgbackup/borg",
+    "winner_url": "https://github.com/borgbackup/borg",
+    "install_command": "sudo pacman -S borg",
+    "reason": "Borg is a highly efficient and powerful deduplicating backup program with strong encryption and compression capabilities, well-suited for handling large datasets and providing robust CLI/API support.",
+    "confidence": 8,
+    "category": "data backup sync encrypted"
+  },
+  {
+    "winner_name": "AutoGPT",
+    "winner_repo": "Significant-Gravitas/AutoGPT",
+    "winner_url": "https://github.com/Significant-Gravitas/AutoGPT",
+    "install_command": "git clone https://github.com/Significant-Gravitas/AutoGPT.git\ncd AutoGPT\npip install -r requirements.txt",
+    "reason": "AutoGPT is actively maintained, works natively on Arch Linux, has a clear Python API, uses minimal resources, and is free and open source.",
+    "confidence": 8,
+    "category": "AI deep research agent"
+  },
+  {
+    "winner_name": "Logseq",
+    "winner_repo": "logseq/logseq",
+    "winner_url": "https://github.com/logseq/logseq",
+    "install_command": "sudo pacman -S logseq",
+    "reason": "Logseq is a privacy-first, open-source platform for knowledge management that supports graph-based note-taking, integrates well with Wayland, and has a strong community and robust API for automation.",
+    "confidence": 8,
+    "category": "knowledge graph personal wiki"
+  },
+  {
+    "winner_name": "AutoGPT",
+    "winner_repo": "Significant-Gravitas/AutoGPT",
+    "winner_url": "https://github.com/Significant-Gravitas/AutoGPT",
+    "install_command": "git clone https://github.com/Significant-Gravitas/AutoGPT.git\ncd AutoGPT\npython -m venv venv\nsource venv/bin/activate\npip install -r requirements.txt",
+    "reason": "AutoGPT is actively maintained, supports a wide range of plugins, and has a clear CLI for automation tasks, making it a versatile and resource-efficient choice.",
+    "confidence": 8,
+    "category": "AI research paper arxiv"
+  },
+  {
+    "winner_name": "FFmpeg",
+    "winner_repo": "FFmpeg/FFmpeg",
+    "winner_url": "https://github.com/FFmpeg/FFmpeg",
+    "install_command": "sudo pacman -S ffmpeg",
+    "reason": "FFmpeg is the most widely used and powerful tool for media transcoding, supports a wide range of codecs and formats, has excellent AMD GPU acceleration through VAAPI, and is actively maintained.",
+    "confidence": 9,
+    "category": "media transcoding AMD GPU"
+  },
+  {
+    "winner_name": "VIPS",
+    "winner_repo": "libvips/libvips",
+    "winner_url": "https://libvips.github.io/libvips/",
+    "install_command": "sudo pacman -S vips",
+    "reason": "VIPS is a fast image processing system with low memory needs, making it ideal for handling large images efficiently on the target system with limited VRAM and RAM.",
+    "confidence": 8,
+    "category": "image editor CLI python"
+  },
+  {
+    "winner_name": "open-webui",
+    "winner_repo": "open-webui/open-webui",
+    "winner_url": "https://github.com/open-webui/open-webui",
+    "install_command": "yay -S open-webui",
+    "reason": "open-webui is user-friendly, supports multiple AI models, integrates well with other tools, and fits within the system's resource constraints.",
+    "confidence": 8,
+    "category": "AI music generation local"
+  },
+  {
+    "winner_name": "ripgrep",
+    "winner_repo": "BurntSushi/ripgrep",
+    "winner_url": "https://github.com/BurntSushi/ripgrep",
+    "install_command": "sudo pacman -S ripgrep",
+    "reason": "ripgrep is a line-oriented search tool that recursively searches your current directory for a regex pattern. It is actively maintained, has a clear CLI, uses minimal resources, and is free and open source.",
+    "confidence": 9,
+    "category": "MASTER INDEX"
+  }
+]

@@ -1,0 +1,152 @@
+[
+  {
+    "tool": "ffmpeg",
+    "category": "media transcoding AMD GPU",
+    "timestamp": "2026-03-21T17:51:02.835170",
+    "installed": false,
+    "skill_created": true,
+    "skill_path": "/home/gamerx/aria/skills/media_transcoding_amd_gpu_agent.py",
+    "test_passed": true,
+    "notes": "Installation failed, attempting skill generation anyway"
+  },
+  {
+    "tool": "vips",
+    "category": "image editor CLI python",
+    "timestamp": "2026-03-21T17:51:19.876729",
+    "installed": false,
+    "skill_created": true,
+    "skill_path": "/home/gamerx/aria/skills/image_editor_cli_python_agent.py",
+    "test_passed": true,
+    "notes": "Installation failed, attempting skill generation anyway"
+  },
+  {
+    "tool": "wf-recorder",
+    "category": "screen recording wayland",
+    "timestamp": "2026-03-21T17:51:34.990700",
+    "installed": false,
+    "skill_created": true,
+    "skill_path": "/home/gamerx/aria/skills/screen_recording_wayland_agent.py",
+    "test_passed": true,
+    "notes": "Installation failed, attempting skill generation anyway"
+  },
+  {
+    "tool": "easyocr",
+    "category": "computer vision OCR screenshot",
+    "timestamp": "2026-03-21T17:51:49.843680",
+    "installed": false,
+    "skill_created": true,
+    "skill_path": "/home/gamerx/aria/skills/computer_vision_ocr_screenshot_agent.py",
+    "test_passed": true,
+    "notes": "Installation failed, attempting skill generation anyway"
+  },
+  {
+    "tool": "ocrmypdf",
+    "category": "PDF manipulation python",
+    "timestamp": "2026-03-21T17:51:57.016863",
+    "installed": false,
+    "skill_created": true,
+    "skill_path": "/home/gamerx/aria/skills/pdf_manipulation_python_agent.py",
+    "test_passed": true,
+    "notes": "Installation failed, attempting skill generation anyway"
+  },
+  {
+    "tool": "whisper",
+    "category": "speech to text STT whisper",
+    "timestamp": "2026-03-21T17:52:04.412763",
+    "installed": false,
+    "skill_created": true,
+    "skill_path": "/home/gamerx/aria/skills/speech_to_text_stt_whisper_agent.py",
+    "test_passed": false,
+    "notes": "Installation failed, attempting skill generation anyway | Self-correction failed: Help failed: Error: whisper is not installed. Please install it to use this script."
+  },
+  {
+    "tool": "scrapy",
+    "category": "web scraping automation AI",
+    "timestamp": "2026-03-21T17:52:14.526069",
+    "installed": false,
+    "skill_created": true,
+    "skill_path": "/home/gamerx/aria/skills/web_scraping_automation_ai_agent.py",
+    "test_passed": true,
+    "notes": "Installation failed, attempting skill generation anyway"
+  },
+  {
+    "tool": "glances",
+    "category": "system monitoring terminal TUI",
+    "timestamp": "2026-03-21T17:52:20.658735",
+    "installed": false,
+    "skill_created": true,
+    "skill_path": "/home/gamerx/aria/skills/system_monitoring_terminal_tui_agent.py",
+    "test_passed": true,
+    "notes": "Installation failed, attempting skill generation anyway"
+  },
+  {
+    "tool": "nnn",
+    "category": "terminal file manager TUI",
+    "timestamp": "2026-03-21T17:52:37.360648",
+    "installed": false,
+    "skill_created": true,
+    "skill_path": "/home/gamerx/aria/skills/terminal_file_manager_tui_agent.py",
+    "test_passed": true,
+    "notes": "Installation failed, attempting skill generation anyway"
+  },
+  {
+    "tool": "borg",
+    "category": "data backup sync encrypted",
+    "timestamp": "2026-03-21T17:52:47.937274",
+    "installed": false,
+    "skill_created": true,
+    "skill_path": "/home/gamerx/aria/skills/data_backup_sync_encrypted_agent.py",
+    "test_passed": true,
+    "notes": "Installation failed, attempting skill generation anyway"
+  },
+  {
+    "tool": "pass",
+    "category": "password manager CLI",
+    "timestamp": "2026-03-21T17:52:59.966435",
+    "installed": false,
+    "skill_created": true,
+    "skill_path": "/home/gamerx/aria/skills/password_manager_cli_agent.py",
+    "test_passed": true,
+    "notes": "Installation failed, attempting skill generation anyway"
+  },
+  {
+    "tool": "scrcpy",
+    "category": "android ADB automation scrcpy",
+    "timestamp": "2026-03-21T17:53:17.424696",
+    "installed": false,
+    "skill_created": true,
+    "skill_path": "/home/gamerx/aria/skills/android_adb_automation_scrcpy_agent.py",
+    "test_passed": true,
+    "notes": "Installation failed, attempting skill generation anyway"
+  },
+  {
+    "tool": "copyq",
+    "category": "clipboard manager wayland",
+    "timestamp": "2026-03-21T17:53:26.818673",
+    "installed": false,
+    "skill_created": true,
+    "skill_path": "/home/gamerx/aria/skills/clipboard_manager_wayland_agent.py",
+    "test_passed": true,
+    "notes": "Installation failed, attempting skill generation anyway"
+  },
+  {
+    "tool": "llama.cpp",
+    "category": "local LLM inference engine",
+    "timestamp": "2026-03-21T17:53:36.545889",
+    "installed": false,
+    "skill_created": true,
+    "skill_path": "/home/gamerx/aria/skills/local_llm_inference_engine_agent.py",
+    "test_passed": true,
+    "notes": "Installation failed, attempting skill generation anyway"
+  },
+  {
+    "tool": "sniffnet",
+    "category": "network security scanner linux",
+    "timestamp": "2026-03-21T17:53:46.772688",
+    "installed": false,
+    "skill_created": true,
+    "skill_path": "/home/gamerx/aria/skills/network_security_scanner_linux_agent.py",
+    "test_passed": true,
+    "notes": "Installation failed, attempting skill generation anyway"
+  }
+]

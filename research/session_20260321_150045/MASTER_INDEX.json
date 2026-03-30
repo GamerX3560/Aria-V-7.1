@@ -1,0 +1,25 @@
+{
+  "session": "20260321_150045",
+  "total_categories": 16,
+  "total_urls_crawled": 256,
+  "total_time_seconds": 7437.8449873924255,
+  "categories": [
+    "file format converter universal",
+    "PDF manipulation python",
+    "web scraping automation AI",
+    "terminal file manager TUI",
+    "system monitoring terminal TUI",
+    "social media bot automation API",
+    "gmail API email automation",
+    "network security scanner linux",
+    "password manager CLI",
+    "data backup sync encrypted",
+    "AI deep research agent",
+    "knowledge graph personal wiki",
+    "AI research paper arxiv",
+    "media transcoding AMD GPU",
+    "image editor CLI python",
+    "AI music generation local"
+  ],
+  "output_dir": "/home/gamerx/aria/research/session_20260321_150045"
+}

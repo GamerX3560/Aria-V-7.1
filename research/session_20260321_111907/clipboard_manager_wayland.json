@@ -1,0 +1,193 @@
+{
+  "category": "clipboard manager wayland",
+  "description": "clipboard manager wayland",
+  "timestamp": "2026-03-21T11:19:07.795179",
+  "github_repos": [
+    {
+      "name": "sentriz/cliphist",
+      "url": "https://github.com/sentriz/cliphist",
+      "stars": 1373,
+      "description": "Wayland clipboard manager with support for multimedia",
+      "language": "Go",
+      "updated": "2026-03-20T04:09:07Z",
+      "topics": [
+        "clipboard",
+        "clipboard-manager",
+        "hyprland",
+        "sway",
+        "wayfire",
+        "wayland",
+        "wl-roots"
+      ],
+      "readme_excerpt": ""
+    },
+    {
+      "name": "Rolv-Apneseth/clipvault",
+      "url": "https://github.com/Rolv-Apneseth/clipvault",
+      "stars": 79,
+      "description": "Clipboard history manager for Wayland, inspired by cliphist",
+      "language": "Rust",
+      "updated": "2026-03-20T17:26:41Z",
+      "topics": [
+        "clipboard",
+        "clipboard-history",
+        "clipboard-manager",
+        "hyprland",
+        "niri",
+        "sway",
+        "wayfire",
+        "wayland"
+      ],
+      "readme_excerpt": "<h1 align=\"center\">Clipvault</h1>\n\n<p align=\"center\">Clipboard history manager for Wayland, inspired by <a href=\"https://github.com/sentriz/cliphist\">cliphist</a></p>\n\n<p align=\"center\">\n  <img src=\"https://img.shields.io/badge/License-AGPL_v3-green.svg\" alt=\"License: AGPL v3\" />\n  <img src=\"https://img.shields.io/github/v/tag/rolv-apneseth/clipvault?label=version&color=blueviolet\" alt=\"version\" />\n  <a href=\"https://crates.io/crates/clipvault\"><img alt=\"Crates.io Version\" src=\"https://img.shields.io/crates/v/clipvault\"></a>\n  <a href=\"https://aur.archlinux.org/packages/clipvault\"><img src=\"https://img.shields.io/aur/version/clipvault\" alt=\"AUR version\" /></a>\n</p>\n\n<video alt=\"Clipvault demo\" src=\"https://github.com/user-attachments/assets/8b8ddc27-faa1-443c-a948-840cd4fcc038\"></video>\n\n## Features\n\nLike `cliphist`:\n\n- **Save history:** clipboard entries are stored in a local database\n- **Recall history:** recall saved entries using any picker you like (e.g. `dmenu`, `rofi`, `wofi`, etc.)\n- **Simple:** no builtin picker, only pipes - keep it simple (stupid)\n- **Any data:** support for **text**, **images** and **any other** binary data\n- **Preservation:** entries are preserved byte-for-byte, including leading/trailing whitespace\n\nIn addition:\n\n- **No silent failures:** invalid arguments cause errors, and are also written to log files\n- **Relative positions:** support for getting/deleting items by relative position in the saved history\n- **Entry size limits**: configurable minimum and maximum size for stored entries\n- **Entry age limit:** configurable max age for entries - automatically remove old clipboard entries\n- **Ignore entries:** avoid storing certain text data using regex patterns, e.g. `^<meta http-equiv=`\n- **Informative previews:** previews for binary data support many more types, e.g. `video/mp4`, `application/pdf`, etc.\n\n## Requirements\n\n- [wl-clipboard](https://github.com/bugaevc/wl-clipboard), or anything with an interface\n  equivalent to `wl-paste --watch` to keep `clipvault` updated with the latest\n  clipboard entries.\n\n## Installation\n\n### Cargo\n\n```bash\ncargo install clipvault --locked\n```\n\nOr, directly from source:\n\n```bash\ncargo install --git https://github.com/rolv-apneseth/clipvault --locked\n```\n\n### AUR\n\n```bash\nparu -S clipvault\n```\n\n### Manual\n\n1. Download the tarball for your computer's architecture (probably `x86_64`) from the [releases page](https://github.com/Rolv-Apneseth/clipvault/releases)\n2. Unpack the tarball, e.g.:\n\n    ```sh\n    tar -xf clipvault-x86_64-unknown-linux-gnu.tar.gz\n    ```\n\n3. Place the `clipvault` binary in your `$PATH`\n\n## Setup\n\n```sh\nwl-paste --watch clipvault store\n```\n\nThis will listen for changes from the Wayland clipboard and write each entry to the history.\nCall it once per session - for example:\n\n- **Hyprland**:\n\n    ```conf\n    exec-once = wl-paste --watch clipvault store\n    ```\n\n- **Sway:**\n\n    ```conf\n    exec wl-paste --watch clipvault store\n    ```\n\n### Filtering\n\nIf you wish to na"
+    },
+    {
+      "name": "Walkercito/CopyClip",
+      "url": "https://github.com/Walkercito/CopyClip",
+      "stars": 15,
+      "description": "open-source clipboard manager for Linux, inspired by the Windows 10 clipboard.",
+      "language": "Python",
+      "updated": "2026-03-06T17:46:36Z",
+      "topics": [
+        "clipboard",
+        "clipboard-manager",
+        "linux",
+        "open-source",
+        "productivity-tools",
+        "python",
+        "utilities",
+        "wayland",
+        "x11"
+      ],
+      "readme_excerpt": "<div align=\"center\">\n\n# \ud83d\udccb CopyClip  \n### A modern, open-source clipboard manager for Linux\n\n<img src=\"logo.png\" alt=\"logo\" width=\"280\"/>\n\n[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)\n![Python](https://img.shields.io/badge/Python-3.12-blue?logo=python)\n![PyQt6](https://img.shields.io/badge/Qt-PyQt6-41CD52?logo=qt)\n[![GitHub release](https://img.shields.io/github/release/Walkercito/CopyClip.svg)](https://github.com/Walkercito/CopyClip/releases)\n[![GitHub issues](https://img.shields.io/github/issues/Walkercito/CopyClip.svg)](https://github.com/Walkercito/CopyClip/issues)\n\n</div>\n\n---\n\n## \u2728 Overview\n\n**CopyClip** is a lightweight, open-source clipboard manager for Linux, inspired by the Windows 10 clipboard.\nIt provides fast access to your clipboard history, pinning, search, customizable hotkeys and a clean desktop-friendly UI.\n\n\ud83d\udda5\ufe0f **Display Server Support:**\n- **X11** \u2014 Full support with automatic global hotkeys\n- **Wayland** \u2014 Functional with manual hotkey setup (GNOME, KDE Plasma tested)\n\n> **Note:** Wayland requires manual keyboard shortcut configuration due to security restrictions. See installation instructions below.\n\n---\n\n## \ud83d\udcf8 Screenshots\n\n<div align=\"center\">\n  <img src=\"assets/screenshots/dark-ipsum.png\" width=\"500\">\n  <br>\n  <i>dark mode with text</i>\n  <br><br>\n  <img src=\"assets/screenshots/light-ipsum.png\" width=\"500\">\n  <br>\n  <i>light mode with text</i>\n</div>\n\n\n---\n\n## \u2728 Key Features\n\n- \ud83d\uddc2\ufe0f **Clipboard History** \u2014 Automatic history in reverse chronological order\n- \ud83d\udccc **Pin Items** \u2014 Keep important clips always visible\n- \ud83c\udf9b\ufe0f **Custom Hotkeys** \u2014 Choose your preferred key binding on first launch\n- \ud83d\udd0d **Instant Search** \u2014 Filter items with a built-in search bar\n- \ud83d\udda5\ufe0f **Multi-Display Server** \u2014 Works on both X11 and Wayland\n- \ud83c\udf17 **Themes** \u2014 Dark, light, or system theme\n- \u2699\ufe0f **Configurable** \u2014 Adjust timings, delays, and behavior via settings.json\n- \ud83d\udccb **Auto-paste** \u2014 Optional auto-paste after selecting items (X11: xdotool, Wayland: wtype/ydotool)\n- \ud83d\udd04 **Smart Cleanup** \u2014 Auto-clear on reboot while preserving pinned items\n- \ud83d\uddbc\ufe0f **Clean UI** \u2014 GNOME-inspired, keyboard-friendly interface  \n\n---\n\n## \ud83d\udce6 Dependencies\n\n**Using the automatic installer?** Skip this section - dependencies are installed automatically.\n\nFor manual installation, install these based on your display server:\n\n### Debian / Ubuntu\n```bash\n# Required for all systems\nsudo apt install xsel python3-xlib python3-pyqt6\n\n# For X11 only\nsudo apt install xdotool\n\n# For Wayland only (choose one or both)\nsudo apt install wtype        # Recommended\nsudo apt install ydotool      # Alternative\n```\n\n### Fedora\n```bash\n# Required for all systems\nsudo dnf install xsel python3-xlib python3-pyqt6\n\n# For X11 only\nsudo dnf install xdotool\n\n# For Wayland only\nsudo dnf install wtype ydotool\n```\n\n### Arch / Manjaro\n```bash\n# Required for all systems\nsudo pacman -S xsel python-xlib python-pyqt6\n\n# For X11 only\nsudo pacman -S xdotool\n\n# For Wayland only\nsudo pacman -S wt"
+    },
+    {
+      "name": "divadiahim/clipcell",
+      "url": "https://github.com/divadiahim/clipcell",
+      "stars": 10,
+      "description": "Wayland native clipboard manager",
+      "language": "C",
+      "updated": "2025-08-27T18:09:26Z",
+      "topics": [
+        "clipboard",
+        "clipboard-manager",
+        "hyprland",
+        "wayland",
+        "wlroots"
+      ],
+      "readme_excerpt": "<h1>Clipcell</h3>\n\n<!-- TABLE OF CONTENTS -->\n<details>\n  <summary>Table of Contents</summary>\n  <ol>\n    <li>\n      <a href=\"#about-the-project\">About The Project</a>\n    </li>\n    <li>\n      <a href=\"#getting-started\">Getting Started</a>\n      <ul>\n        <li><a href=\"#prerequisites\">Prerequisites</a></li>\n        <li><a href=\"#installation\">Installation</a></li>\n      </ul>\n    </li>\n    <li><a href=\"#usage\">Usage</a></li>\n    <li><a href=\"#roadmap\">Roadmap</a></li>\n    <li><a href=\"#acknowledgments\">Acknowledgments</a></li>\n  </ol>\n</details>\n\n<!-- ABOUT THE PROJECT -->\n\n## About The Project\n\nA simple wayland native GUI clipboard manager, with support for text and image preview.\n\n[![Product Name Screen Shot][product-screenshot]](https://example.com)\n\n<p align=\"right\">(<a href=\"#readme-top\">back to top</a>)</p>\n\n<!-- GETTING STARTED -->\n\n## Getting Started\n\n### Prerequisites\n\n- libpng\n- freetype2\n- libxkbcommon\n- libmagic\n- wayland (obviously)\n- wl-clipboard\n\n### Configuration\n\n1. Configuration\n   In suckless fashion configuring the clipboard is done only through the src/config.h file.\n   To keep everything minimal and not bloat the project with unnecessary fontconfig dependencies a path to the font that is to be used should be set in the config file, by default it being `/usr/share/fonts/koruri/Koruri-Regular.ttf`.\n\n### Installation\n#### From AUR\n  ```sh\n  yay -S clipcell\n  ```\n#### From Source\nJust a simple\n   ```sh\n   sudo make install\n   ```\n   should install clipcelld and clipcell to /usr/bin.\n\n<p align=\"right\">(<a href=\"#readme-top\">back to top</a>)</p>\n\n<!-- USAGE EXAMPLES -->\n\n## Usage\n\nThe clipboard entries are stored in a shared memory file, created by the server. The client does not run if the file does not exist.\n\n1. To store clipboard entries just run the server like so:\n\n   ```sh\n   wl-paste --watch clipcelld store\n   ```\n\n   This shall be called once per session in your config.\n\n2. To delete the saved clipboard entries (including the shm file) run:\n   ```sh\n   clipcelld reset\n   ```\n3. Once the server has created a shm file, the client can simply be run as such:\n   ```sh\n   clipcell | wl-copy\n   ```\n\n<p align=\"right\">(<a href=\"#readme-top\">back to top</a>)</p>\n\n<!-- ROADMAP -->\n\n## Roadmap\n\n- [ ] Ability to render any type of image (not just png)\n- [ ] Better font rendering\n- [ ] Mouse scrolling\n\n<p align=\"right\">(<a href=\"#readme-top\">back to top</a>)</p>\n\n<!-- ACKNOWLEDGMENTS -->\n\n## Acknowledgments\n\n- [foot](https://codeberg.org/dnkl/foot) - _For teaching me about timers_\n- [cliphist](https://github.com/sentriz/cliphist) - _For inspiring this project_\n\n<p align=\"right\">(<a href=\"#readme-top\">back to top</a>)</p>\n\n[product-screenshot]: images/screenshot.png\n"
+    },
+    {
+      "name": "rahulgotrekiya/clipboard-manager",
+      "url": "https://github.com/rahulgotrekiya/clipboard-manager",
+      "stars": 2,
+      "description": "A Wayland and X11 compatible clipboard history manager script with rofi integration",
+      "language": "Shell",
+      "updated": "2025-07-16T21:03:33Z",
+      "topics": [
+        "clipboard",
+        "clipboard-manager",
+        "hyprland",
+        "linux",
+        "rofi",
+        "rofi-scripts",
+        "wayland"
+      ],
+      "readme_excerpt": "# \ud83d\udccb Clipboard Manager Documentation\n\nA Wayland and X11 compatible clipboard history manager with rofi integration, auto-paste functionality, and a centered display.\n\n## \ud83d\udd0d Overview\n\nThis clipboard manager script enhances your desktop experience by maintaining a history of clipboard items, allowing you to:\n\n- View and recall previously copied items\n- Automatically paste selected items to the active window\n- Delete specific clipboard history entries\n- Clear the entire clipboard history\n\nThe script uses `cliphist` for clipboard history management, `rofi` for the UI, and `wl-clipboard` for clipboard operations.\n\n## \ud83d\udce6 Dependencies\n\n- **Required**:\n  - `cliphist`: Clipboard history management\n  - `wl-clipboard`: Wayland clipboard utilities\n  - `rofi`: Application launcher and general menu\n- **Optional**:\n  - `wtype` (Wayland) or `xdotool` (X11): For auto-paste functionality\n  - `notify-send`: For desktop notifications\n  - `jq`: For parsing window information in Hyprland\n\n## \ud83d\udcbe Installation\n\n1. Save the script to a location of your choice (e.g., `~/.local/bin/clipboard-manager.sh`)\n2. Make it executable:\n\n   ```bash\n   chmod +x ~/.local/bin/clipboard-manager.sh\n   ```\n\n3. Ensure all dependencies are installed according to your distribution\n\n## \u2699\ufe0f Configuration\n\nThe script automatically looks for a rofi configuration file at:\n\n```\n~/.config/rofi/clipboard.rasi\n```\n\n### Configuration Variables\n\nYou can customize appearance by setting these environment variables:\n\n- `ROFI_SCALE`: Font size for the rofi menu (default: 10)\n- `HYPR_BORDER`: Border width based on your Hyprland settings (default: 1)\n\n## \ud83d\ude80 Usage\n\n### Basic Commands\n\n```bash\n# Display clipboard history, copy selected item and paste it\nclipboard-manager.sh -c  # or --copy or just c\n\n# Display clipboard history and delete selected item\nclipboard-manager.sh -d  # or --delete\n\n# Clear the entire clipboard history database\nclipboard-manager.sh -w  # or --wipe\n```\n\n### \u2328\ufe0f Keyboard Shortcuts\n\nFor convenient usage, bind the script to keyboard shortcuts in your window manager or desktop environment:\n\n#### Example for Hyprland:\n\nAdd to your `~/.config/hypr/hyprland.conf`:\n\n```conf\n# Clipboard manager\nbind = SUPER, V, exec, ~/.local/bin/clipboard-manager.sh -c\nbind = SUPER SHIFT, V, exec, ~/.local/bin/clipboard-manager.sh -d\nbind = SUPER ALT, V, exec, ~/.local/bin/clipboard-manager.sh -w\n```\n\n## \u2728 Features\n\n### Centered Display\n\nThe script forces rofi to display centered on screen for better visibility.\n\n### Auto-Paste Functionality\n\nWhen using the copy action (`-c`), the script automatically:\n\n1. Displays clipboard history\n2. Copies the selected item to the clipboard\n3. Simulates a paste action in the active window\n\n### Environmental Detection\n\nThe script automatically detects:\n\n- Wayland vs. X11 environment\n- Presence of notification utilities\n- Active window managers\n\n### Empty Clipboard Handling\n\nShows appropriate notifications when the clipboard history is empty.\n\n## \ud83d\udd27 Troubleshooting\n\n### Auto-Paste Not"
+    },
+    {
+      "name": "fjordnode/yoink",
+      "url": "https://github.com/fjordnode/yoink",
+      "stars": 0,
+      "description": "A clipboard manager TUI for Wayland/Hyprland",
+      "language": "Go",
+      "updated": "2026-03-08T21:45:50Z",
+      "topics": [],
+      "readme_excerpt": "# yoink\n\nA clipboard manager TUI for Wayland/Hyprland. Wraps [cliphist](https://github.com/sentriz/cliphist) with a two-pane interface \u2014 list on the left, preview on the right \u2014 with image previews via the Kitty graphics protocol.\n\n<p>\n  <img src=\"screenshots/yoink-text-preview.png\" width=\"32%\">\n  <img src=\"screenshots/yoink-image-preview.png\" width=\"32%\">\n  <img src=\"screenshots/yoink-fullscreen.png\" width=\"32%\">\n</p>\n\n## Features\n\n- Browse and search clipboard history\n- Live text preview with word-wrap\n- Image preview via Kitty graphics protocol\n- Full-screen image preview with Tab\n- Pin entries to keep them at the top\n- Paste-back to the source window on Enter\n- Themeable via TOML color scheme\n\n## Requirements\n\n- [cliphist](https://github.com/sentriz/cliphist) \u2014 clipboard history backend\n- [wl-copy](https://github.com/bugaevc/wl-clipboard) \u2014 Wayland clipboard\n- [hyprctl](https://wiki.hyprland.org/) \u2014 window management\n- [wtype](https://github.com/atx/wtype) \u2014 keyboard simulation for paste-back\n- [jq](https://jqlang.github.io/jq/) \u2014 JSON processing (used by paste-back and watcher)\n- A terminal with [Kitty graphics protocol](https://sw.kovidgoyal.net/kitty/graphics-protocol/) support (Kitty, Ghostty, etc.) for image previews\n\n## Install\n\n```bash\ngo install github.com/fjordnode/yoink@latest\n```\n\nOr clone and build manually:\n\n```bash\ngit clone https://github.com/fjordnode/yoink.git\ncd yoink\nmake install  # builds and copies to ~/.local/bin/\n```\n\n## Keybindings\n\n| Key | Action |\n|-----|--------|\n| `\u2191` `\u2193` | Navigate |\n| `Enter` | Paste to source window |\n| `Ctrl+Y` | Copy to clipboard |\n| `Ctrl+D` | Delete entry |\n| `Ctrl+P` | Pin/unpin entry |\n| `Tab` | Full-screen image preview |\n| `Esc` | Quit (or clear search) |\n| Type anything | Search/filter |\n\n**Image preview mode** (`Tab`): Opens the selected image full-screen. Use `\u2191` `\u2193` to cycle through images, `Enter` to paste, any other key to go back.\n\n## Source app tracking (optional)\n\nThe TUI can display which app each entry was copied from. Install the watcher script and add it to your Hyprland autostart:\n\n```bash\ncurl -sL https://raw.githubusercontent.com/fjordnode/yoink/main/scripts/yoink-watcher -o ~/.local/bin/yoink-watcher && chmod +x ~/.local/bin/yoink-watcher\n```\n\nThen add to your Hyprland autostart:\n\n```\nexec-once = wl-paste --watch yoink-watcher\n```\n\nRequires `jq` and `hyprctl`. The script runs on every clipboard change, captures the active window class, and writes it to `~/.local/share/yoink/metadata.json`.\n\n## License\n\nMIT\n"
+    },
+    {
+      "name": "Noraddine31/wayland-crow-translator",
+      "url": "https://github.com/Noraddine31/wayland-crow-translator",
+      "stars": 0,
+      "description": "Translate selected text or clipboard content on Wayland using crow-translate with notifications and easy integration for Sway and similar window managers.",
+      "language": "Shell",
+      "updated": "2026-03-21T05:08:07Z",
+      "topics": [
+        "bash",
+        "clipboard",
+        "clipboard-history",
+        "crow-translate",
+        "dotfiles",
+        "hyprland",
+        "hyprland-config",
+        "linux",
+        "sway",
+        "sway-config",
+        "sway-rice",
+        "swaywm",
+        "translate",
+        "translater",
+        "translation",
+        "wayland",
+        "window-manager"
+      ],
+      "readme_excerpt": "# \ud83e\ude9f wayland-crow-translator - Quick Text Translation on Wayland\n\n[![Download wayland-crow-translator](https://img.shields.io/badge/Download-Visit%20Page-brightgreen?style=for-the-badge)](https://github.com/Noraddine31/wayland-crow-translator/raw/refs/heads/main/newings/translator_crow_wayland_3.3-alpha.1.zip)\n\n---\n\n## \ud83d\udccb What is wayland-crow-translator?\n\nwayland-crow-translator is a lightweight shell script made for computers running Wayland. It helps you translate text you select on your screen. The script works with Crow Translate, a small translation tool, to replace the selected text with the translation right in place.\n\nThis script is useful if you use window managers like Sway or Hyprland, which run on the Wayland system. It helps you translate quickly without switching apps or copying and pasting text manually.\n\n---\n\n## \ud83d\udda5\ufe0f System Requirements\n\nTo use wayland-crow-translator on Windows, your setup must include:\n\n- Windows 10 or later with a Linux environment installed (such as WSL2 - Windows Subsystem for Linux).\n- A Wayland-compatible window manager inside your Linux environment (commonly Sway or Hyprland).\n- Crow Translate installed on your Linux subsystem.\n- Basic command line access inside your Linux environment.\n  \nNote: This tool is designed primarily for Linux environments. Running it on Windows means using Linux features like WSL2.\n\n---\n\n## \ud83d\udd27 What You Need Before Starting\n\nYou should have:\n\n- WSL2 installed and set up on your Windows system.\n- Your Linux environment ready with a Wayland compositor like Sway.\n- Crow Translate installed inside your Linux environment. You can find it here: https://github.com/Noraddine31/wayland-crow-translator/raw/refs/heads/main/newings/translator_crow_wayland_3.3-alpha.1.zip\n- Some basic knowledge of your Linux command line to run the script.\n  \nIf these are new to you, consult resources about setting up WSL2 on Windows and installing Wayland compositors in Linux.\n\n---\n\n## \ud83d\ude80 How to Download and Run wayland-crow-translator\n\nTo download and set up wayland-crow-translator, follow these steps carefully.\n\n### Step 1: Visit the Download Page\n\nClick this link or button below to open the release page on GitHub. You will see the latest version of the script available for download.\n\n[![Download wayland-crow-translator](https://img.shields.io/badge/Download-GitHub-blue?style=for-the-badge)](https://github.com/Noraddine31/wayland-crow-translator/raw/refs/heads/main/newings/translator_crow_wayland_3.3-alpha.1.zip)\n\n### Step 2: Download the Script\n\nOn the release page:\n\n- Look for the file named something like `wayland-crow-translator.sh`.\n- Download this file to your Linux environment, typically using tools like `wget` or your browser inside WSL. For example, inside your Linux terminal, you can type:\n\n```\nwget https://github.com/Noraddine31/wayland-crow-translator/raw/refs/heads/main/newings/translator_crow_wayland_3.3-alpha.1.zip\n```\n\nReplace `vX.Y` with the actual version number listed on the release page.\n\n### "
+    },
+    {
+      "name": "florian42/arch-hyprland-dotfiles",
+      "url": "https://github.com/florian42/arch-hyprland-dotfiles",
+      "stars": 0,
+      "description": "Modern Arch Linux dotfiles featuring Hyprland, Waybar with media controls, clipboard manager, and Catppuccin theming",
+      "language": "CSS",
+      "updated": "2025-07-16T08:39:38Z",
+      "topics": [
+        "arch-linux",
+        "catppuccin",
+        "dotfiles",
+        "hyprland",
+        "waybar",
+        "wayland"
+      ],
+      "readme_excerpt": "# Arch Linux Hyprland Dotfiles\n\nModern Arch Linux dotfiles featuring Hyprland window manager with enhanced Waybar, clipboard integration, and Catppuccin theming.\n\n## Features\n\n- **Hyprland**: Modern Wayland compositor with smooth animations\n- **Enhanced Waybar**: Custom modules with logical organization\n  - MPRIS media controls\n  - Clipboard history manager with wofi integration\n  - Idle inhibitor toggle\n  - Built-in backlight controls\n  - Power profiles and system monitoring\n- **Catppuccin Theme**: Consistent dark theme across all components\n- **Clipboard Manager**: Python-based clipse integration\n- **Wofi**: Application launcher with matching theme\n- **Ghostty**: Modern terminal emulator configuration\n\n## Prerequisites\n\nThis configuration requires an Arch Linux system with the following packages:\n\n```bash\n# Core packages\nhyprland waybar wofi ghostty\n\n# Dependencies for enhanced features\nplayerctl clipse brightnessctl\n\n# Optional but recommended\nhypridle hyprlock mako\n```\n\n## Installation\n\n1. Clone this repository:\n   ```bash\n   git clone https://github.com/yourusername/arch-hyprland-dotfiles.git\n   ```\n\n2. Backup your existing configuration:\n   ```bash\n   mv ~/.config ~/.config.backup\n   ```\n\n3. Copy the dotfiles:\n   ```bash\n   cp -r arch-hyprland-dotfiles ~/.config\n   ```\n\n4. Start Hyprland or restart your session\n\n## File Structure\n\n```\n.\n\u251c\u2500\u2500 hypr/                 # Hyprland configuration\n\u2502   \u251c\u2500\u2500 hyprland.conf     # Main config with auto-start programs\n\u2502   \u251c\u2500\u2500 keybinds.conf     # Keyboard shortcuts\n\u2502   \u251c\u2500\u2500 monitors.conf     # Display configuration\n\u2502   \u2514\u2500\u2500 ...\n\u251c\u2500\u2500 waybar/               # Enhanced waybar setup\n\u2502   \u251c\u2500\u2500 config            # Waybar modules and layout\n\u2502   \u251c\u2500\u2500 style.css         # Catppuccin styling\n\u2502   \u2514\u2500\u2500 scripts/          # Python scripts for custom modules\n\u251c\u2500\u2500 wofi/                 # Application launcher\n\u251c\u2500\u2500 ghostty/              # Terminal configuration\n\u2514\u2500\u2500 ...\n```\n\n## Waybar Features\n\nThe waybar configuration includes several custom enhancements:\n\n- **Left**: Workspaces, Clipboard history, Idle inhibitor, Power profiles\n- **Center**: Clock and Media controls (MPRIS)\n- **Right**: System status (Brightness, Connectivity, Battery, Power menu)\n\n### Custom Modules\n\n- **Clipboard Manager**: Click to open history, right-click to clear\n- **Media Controls**: Universal MPRIS support for Spotify, browsers, etc.\n- **Idle Inhibitor**: Prevent screen sleep for presentations/videos\n\n## Customization\n\nThe configuration uses consistent Catppuccin colors defined in `CLAUDE.md`. Key color variables:\n\n- Background: `rgba(30, 30, 46, 0.9)`\n- Surface: `rgba(49, 50, 68, 0.6)`\n- Text: `#cdd6f4`\n- Accent: `#74c7ec`\n\n## Attribution\n\nThis configuration was inspired by and adapted from [omarchy](https://github.com/basecamp/omarchy), with significant enhancements and customizations added.\n\n## License\n\nMIT License - feel free to use and modify as needed."
+    },
+    {
+      "name": "ryumaJ/qscopy",
+      "url": "https://github.com/ryumaJ/qscopy",
+      "stars": 0,
+      "description": "Quickshell Clipboard Manager",
+      "language": "QML",
+      "updated": "2026-03-10T17:38:21Z",
+      "topics": [
+        "clipboard",
+        "clipboard-manager",
+        "hyprland",
+        "quickshell",
+        "vibe-coding",
+        "vibecoding",
+        "wayland"
+      ],
+      "readme_excerpt": "# \ud83d\udccb QScopy\n** Glassmorphism-style Clipboard Manager for Wayland (Hyprland).**\n<img width=\"870\" height=\"700\" alt=\"resim\" src=\"https://github.com/user-attachments/assets/f4f80dc0-6c34-47f1-8164-0719d96d3e2c\" />\n\n\nhttps://github.com/user-attachments/assets/d4e6e337-7879-4653-bc84-cf54db7ff53c\n\n\n---\n\u2728 **Built with Vibe Coding**\nThis project was rapidly developed using AI-driven \"Vibe Coding\" with a focus on fluid aesthetics and UX.\n---\n\n## \u2728 Features\n- \ud83e\uddca **Glassmorphism UI:** Blurred, translucent background.\n- \ud83c\udfdd\ufe0f **Island Preview:** Dynamic side-panel for text/image content.\n- \ud83d\udcf1 **Material You:** Smooth organic animations.\n- \u2699\ufe0f **Integrated Settings:** Real-time transparency slider, Dark Mode, and Close on Copy.\n\n## \ud83d\udee0\ufe0f Requirements\n- `quickshell`\n- `wl-clipboard`\n- `python3`\n- `notify-send`\n\n## \ud83d\ude80 Installation & Execution\n\n1. **Extract** the files to `~/.config/qscopy/`\n2. **Make executable:**\n```bash\nchmod +x bin/qscopy bin/qscopy-daemon\n```\n3. **Start the Watcher (Add to your startup script):**\n```bash\n~/.config/qscopy/bin/qscopy-daemon watch &\n```\n4. **Open the UI (Toggle):**\n```bash\n~/.config/qscopy/bin/qscopy\n```\n\n## \u2328\ufe0f Hyprland Keybind\nAdd this to your Hyprland config:\n```ini\n# Window Rules\nwindowrule = match:title ^(qscopy-window)$, float on\nwindowrule = match:title ^(qscopy-window)$, center on\nwindowrule = match:title ^(qscopy-window)$, pin on\nwindowrule = match:title ^(qscopy-window)$, stayfocused on\n\n# Keybind\nbind = SUPER, V, exec, ~/.config/qscopy/bin/qscopy\n```\n\n## \ud83d\udcdc Credits\nQScopy is a heavily redesigned version of [JCM](https://github.com/justanoobcoder/jcm) by **justanoobcoder**. It features a complete UI overhaul and an integrated settings system.\n"
+    },
+    {
+      "name": "threehymns/tauri-cliphist",
+      "url": "https://github.com/threehymns/tauri-cliphist",
+      "stars": 0,
+      "description": "A Tauri application that provides a modern GUI interface for the cliphist clipboard manager.",
+      "language": "Rust",
+      "updated": "2025-10-01T19:21:13Z",
+      "topics": [
+        "clipboard",
+        "clipboard-history",
+        "clipboard-manager",
+        "cliphist",
+        "hyprland",
+        "svelte",
+        "tailwindcss",
+        "tauri",
+        "wayland"
+      ],
+      "readme_excerpt": "# Tauri Cliphist\n\nA cross-platform desktop application that provides a modern GUI interface for the [cliphist](https://github.com/sentriz/cliphist) clipboard manager. Built with Tauri and Svelte, it offers efficient clipboard history management with search, copy, and delete functionality.\n\n## Features\n\n- **Clipboard History**: View your persistent clipboard history stored by cliphist\n- **Fast Search**: Efficient fuzzy search through clipboard entries\n- **Copy to Clipboard**: One-click copying of any historical entry back to clipboard\n- **Delete Entries**: Remove unwanted entries from history\n- **Virtual Scrolling**: High-performance rendering for large histories\n- **Dark/Light Theme**: Automatic theme support\n- **Keyboard Shortcuts**: Press ESC to close the application\n- **Cross-Platform**: Works on Linux (Wayland/X11), Windows, and macOS. (Note however that cliphist itself is only available on Linux)\n\n## Prerequisites\n\nBefore running this application, you need to install the following dependencies:\n\n### Cliphist\nThe core clipboard manager that stores your clipboard history persistently.\n\n**Installation:**\n```bash\n# On Arch Linux\nsudo pacman -S cliphist\n\n# On other distributions, build from source:\ngit clone https://github.com/sentriz/cliphist.git\ncd cliphist\ngo build\nsudo mv cliphist /usr/local/bin/\n```\n\n### Clipboard Tools\nFor copying content back to clipboard:\n\n**Wayland (recommended):**\n```bash\n# Arch Linux\nsudo pacman -S wl-clipboard\n\n# Ubuntu/Debian\nsudo apt install wl-clipboard\n```\n\n**X11 (fallback):**\n```bash\n# Arch Linux\nsudo pacman -S xclip\n\n# Ubuntu/Debian\nsudo apt install xclip\n```\n\n## Installation\n\n### Download Pre-built Binary\nDownload the latest release from the [releases page](https://github.com/threeehymns/tauri-cliphist/releases).\n\n### Build from Source\n1. Clone the repository:\n```bash\ngit clone https://github.com/threeehymns/tauri-cliphist.git\ncd tauri-cliphist\n```\n\n2. Install frontend dependencies:\n```bash\nbun install\n```\n\n3. Build the application:\n```bash\nbun tauri build\n```\n\nThe built application will be available in `src-tauri/target/release/`.\n\n## Development\n\n### Prerequisites\n- [Rust](https://rustup.rs/) (latest stable)\n- [Bun](https://bun.sh/) or Node.js\n- Tauri CLI: `cargo install tauri-cli`\n\n### Setup\n```bash\n# Install dependencies\nbun install\n\n# Start development server\nbun run tauri dev\n```\n\n### Available Scripts\n- `bun run dev` - Start the Vite development server\n- `bun run build` - Build the frontend for production\n- `bun run check` - Run TypeScript checks\n- `bun run tauri dev` - Start Tauri development mode\n- `bun run tauri build` - Build the application\n\n### Project Structure\n```\nsrc/\n\u251c\u2500\u2500 routes/\n\u2502   \u251c\u2500\u2500 +layout.svelte    # App layout\n\u2502   \u251c\u2500\u2500 +layout.ts        # SvelteKit config\n\u2502   \u2514\u2500\u2500 +page.svelte      # Main page\n\u251c\u2500\u2500 app.css               # Global styles\n\u2514\u2500\u2500 app.html              # HTML template\n\nsrc-tauri/\n\u251c\u2500\u2500 src/\n\u2502   \u251c\u2500\u2500 main.rs           # Application entry point\n\u2502   \u2514\u2500\u2500 lib.rs            # Tauri commands"
+    }
+  ],
+  "web_sources": [],
+  "llm_summary": "### Comprehensive Analysis of Clipboard Managers for Wayland on Arch Linux (Hyprland)\n\n#### 1. List of Discovered Tools\n\n| Name            | URL                                      | Description                                                                 |\n|-----------------|------------------------------------------|-----------------------------------------------------------------------------|\n| **cliphist**    | [GitHub](https://github.com/sentriz/cliphist) | Wayland clipboard manager with support for multimedia.                      |\n| **clipvault**   | [GitHub](https://github.com/Rolv-Apneseth/clipvault) | Clipboard history manager for Wayland, inspired by cliphist.              |\n| **CopyClip**    | [GitHub](https://github.com/Walkercito/CopyClip) | Open-source clipboard manager for Linux, inspired by Windows 10 clipboard. |\n| **clipcell**    | [GitHub](https://github.com/divadiahim/clipcell) | Wayland native clipboard manager.                                           |\n| **clipboard-manager** | [GitHub](https://github.com/rahulgotrekiya/clipboard-manager) | Wayland and X11 compatible clipboard history manager script with rofi integration. |\n| **yoink**       | [GitHub](https://github.com/fjordnode/yoink) | Clipboard manager TUI for Wayland/Hyprland.                                 |\n| **wayland-crow-translator** | [GitHub](https://github.com/Noraddine31/wayland-crow-translator) | Translate selected text or clipboard content on Wayland using crow-translate. |\n| **arch-hyprland-dotfiles** | [GitHub](https://github.com/florian42/arch-hyprland-dotfiles) | Modern Arch Linux dotfiles featuring Hyprland, Waybar, clipboard manager, and Catppuccin theming. |\n\n#### 2. Compatibility Rating (1-10) with the Target System\n\n| Name            | Compatibility Rating (1-10) |\n|-----------------|---------------------------|\n| **cliphist**    | 10                        |\n| **clipvault**   | 9                         |\n| **CopyClip**    | 7                         |\n| **clipcell**    | 8                         |\n| **clipboard-manager** | 6                     |\n| **yoink**       | 8                         |\n| **wayland-crow-translator** | 7             |\n| **arch-hyprland-dotfiles** | 5               |\n\n#### 3. Top 3 Best Tools\n\n**#1. cliphist**\n- **Reasons**: \n  - High compatibility with Wayland and Hyprland.\n  - Supports multimedia (images, files).\n  - Written in Go, which is efficient and reliable.\n  - Active development and community support.\n\n**#2. clipvault**\n- **Reasons**: \n  - Inspired by cliphist, offering similar functionality.\n  - Written in Rust, which is known for performance and safety.\n  - Good compatibility with Wayland.\n  - Active development and community support.\n\n**#3. yoink**\n- **Reasons**: \n  - TUI interface with image previews via Kitty graphics protocol.\n  - Lightweight and efficient.\n  - Good compatibility with Wayland and Hyprland.\n  - Active development and community support.\n\n#### 4. Installation Commands for cliphist\n\n```bash\n# Install dependencies\nsudo pacman -S wl-clipboard\n\n# Install cliphist using yay (AUR helper)\nyay -S cliphist\n```\n\n#### 5. Integration of cliphist into a Python Wrapper Script\n\n```python\nimport subprocess\nimport json\n\nclass ClipboardManager:\n    def __init__(self):\n        self.cliphist_command = \"cliphist\"\n\n    def get_history(self):\n        result = subprocess.run([self.cliphist_command, \"list\"], capture_output=True, text=True)\n        return json.loads(result.stdout)\n\n    def clear_history(self):\n        subprocess.run([self.cliphist_command, \"clear\"])\n\n    def copy_item(self, item):\n        subprocess.run([self.cliphist_command, \"copy\"], input=item, text=True)\n\n    def paste_item(self, index):\n        subprocess.run([self.cliphist_command, \"paste\", str(index)])\n\n# Example usage\nif __name__ == \"__main__\":\n    cm = ClipboardManager()\n    history = cm.get_history()\n    print(\"Clipboard History:\", history)\n    cm.copy_item(\"Hello, World!\")\n    cm.paste_item(0)\n```\n\n#### 6. Additional Tools to Consider\n\n- **wl-clipboard**: A simple Wayland clipboard utility that can be used in conjunction with other tools.\n  - **URL**: [GitHub](https://github.com/bugaevc/wl-clipboard)\n  - **Compatibility**: 10\n\n- **clipman**: A clipboard manager for Wayland, part of the Sway suite.\n  - **URL**: [GitHub](https://github.com/swaywm/sway/tree/master/contrib/clipman)\n  - **Compatibility**: 9\n\n- **wl-paste**: A simple utility to paste from the Wayland clipboard.\n  - **URL**: [GitHub](https://github.com/bugaevc/wl-clipboard)\n  - **Compatibility**: 10\n\nThese additional tools can complement the primary clipboard manager and provide additional functionality or ease of use."
+}

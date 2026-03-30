@@ -1,0 +1,18 @@
+## Model
+ollama_url: "http://localhost:11434"
+router_model: "aria-router"   # Qwen 3.5 4B — intent parser
+antigravity_model: "cloud"     # Uses Antigravity's own models
+
+## Telegram
+# Loaded from env: TELEGRAM_BOT_TOKEN, TELEGRAM_USER_ID
+
+## Paths
+soul_path: "~/aria/SOUL.md"
+memory_path: "~/aria/memory.json"
+skills_dir: "~/aria/skills"
+vault_path: "~/aria/vault.json"
+
+## Behavior
+max_retries: 3
+context_messages: 20          # Keep last N messages in LLM context
+response_timeout: 120         # Max seconds to wait for LLM response
